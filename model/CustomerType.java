@@ -36,4 +36,8 @@ public class CustomerType {
         this.discount = discount;
     }
 
+    public String toString() {
+		return "CustomerType [id=" + id + ", name=" + name + ", discount=" + discount + "]";
+	}
+
 }

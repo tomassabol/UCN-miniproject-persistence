@@ -76,5 +76,9 @@ public class Customer {
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
     }
+
+    public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", address=" + address + ", city=" + city + ", city=" + city + ", phone number=" + phoneNumber + ", email=" + email + ", customer type=" + customerType + "]";
+	}
     
 }

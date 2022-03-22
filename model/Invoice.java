@@ -48,4 +48,8 @@ public class Invoice {
         this.price = price;
     }
 
+    public String toString() {
+		return "Invoice [id=" + id + ", order=" + order + ", payment date=" + paymentDate + ", price=" + price + "]";
+	}
+
 }

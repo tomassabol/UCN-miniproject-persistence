@@ -77,4 +77,8 @@ public class Product{
         this.supplier = supplier;
     }
 
+    public String toString() {
+        return "Order [id=" + id + ", name=" + name + ", price=" + price + ", country of origin=" + countryOfOrigin + ", inStock=" + inStock + ", supplier=" + supplier + "]";
+    }
+    
 }
