@@ -10,7 +10,6 @@ public class Product{
     private int id;
     private String name;
     private BigDecimal price;
-    private String countryOfOrigin;
     private int inStock;
     private Supplier supplier;
 
@@ -19,14 +18,12 @@ public class Product{
      * @param id
      * @param name
      * @param price
-     * @param countryOfOrigin
      * @param inStock
      * @param supplier
      */
-    private Product(int id, String name, BigDecimal price, String countryOfOrigin, int inStock, Supplier supplier) {
+    public Product(int id, String name, BigDecimal price, int inStock, Supplier supplier) {
         this.id = id;
         this.name = name;
-        this.countryOfOrigin = countryOfOrigin;
         this.inStock = inStock;
         this.supplier = supplier;
     }
@@ -42,10 +39,6 @@ public class Product{
 
     public BigDecimal getPrice() {
         return price;
-    }
-
-    public String getCountryOfOrigin() {
-        return countryOfOrigin;
     }
 
     public int getInStock() {
@@ -65,9 +58,6 @@ public class Product{
         this.price = price;
     }
 
-    public void setCountryOfOrigin(String countryOfOrigin) {
-        this.countryOfOrigin = countryOfOrigin;
-    }
 
     public void setInStock(int inStock) {
         this.inStock = inStock;
@@ -78,7 +68,7 @@ public class Product{
     }
 
     public String toString() {
-        return "Order [id=" + id + ", name=" + name + ", price=" + price + ", country of origin=" + countryOfOrigin + ", inStock=" + inStock + ", supplier=" + supplier + "]";
+        return "Order [id=" + id + ", name=" + name + ", price=" + price + ", inStock=" + inStock + ", supplier=" + supplier + "]";
     }
     
 }
