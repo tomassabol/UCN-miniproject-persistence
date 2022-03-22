@@ -16,7 +16,7 @@ public class Customer {
     /**
      * Constructor for class Customer
      */
-    public Customer(int id, String name, String address, String city, String phoneNumber, String email, String customerType) {
+    public Customer(int id, String name, String address, String city, String phoneNumber, String email, CustomerType customerType) {
         this.name = name;
         this.address = address;
         this.city = city;
