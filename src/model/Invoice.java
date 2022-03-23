@@ -5,11 +5,11 @@ import java.sql.Date;
 
 public class Invoice {
     private int id;
-    private int order;
+    private Order order;
     private Date paymentDate;
     private BigDecimal price;
 
-    public Invoice(int id, int order, Date date, BigDecimal price) {
+    public Invoice(int id, Order order, Date date, BigDecimal price) {
         this.id = id;
         this.order = order;
         this.paymentDate = date;
@@ -24,11 +24,11 @@ public class Invoice {
         this.id = id;
     }
 
-    public int getOrder() {
+    public Order getOrder() {
         return this.order;
     }
 
-    public void setOrder(int order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 
@@ -49,7 +49,7 @@ public class Invoice {
     }
 
     public String toString() {
-		return "Invoice [id=" + id + ", order=" + order + ", payment date=" + paymentDate + ", price=" + price + "]";
+		return "Invoice [id=" + id + ", order=" + order.getId() + ", payment date=" + paymentDate + ", price=" + price + "]";
 	}
 
 }
