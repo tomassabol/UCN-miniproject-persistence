@@ -51,14 +51,14 @@ public class CustomerTypeDB implements CustomerTypeDBIF {
 	@Override
 	public void createCustomerType(CustomerType customerType) throws SQLException {
 		createCustomerType.setString(1, customerType.getName());
-		createCustomerType.setString(2, customerType.getDiscount());
+		createCustomerType.setInt(2, customerType.getDiscount());
 		createCustomerType.execute();
 	}
 	
 	@Override
 	public void updateCustomerType(CustomerType customerType) throws SQLException {
 		updateCustomerType.setString(1, customerType.getName());
-		updateCustomerType.setString(2, customerType.getDiscount());
+		updateCustomerType.setInt(2, customerType.getDiscount());
 		updateCustomerType.execute();
 	}
 	
@@ -69,7 +69,7 @@ public class CustomerTypeDB implements CustomerTypeDBIF {
 	}
 	
 	private CustomerType buildObject(ResultSet rs) throws SQLException {
-		CustomerType customerType = new CustomerType(rs.getInt("Id"), rs.getString("Name"), rs.getString("Discount"));
+		CustomerType customerType = new CustomerType(rs.getInt("Id"), rs.getString("Name"), rs.getInt("Discount"));
 		return customerType;
 	}
 	
