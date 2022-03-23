@@ -43,7 +43,7 @@ public class OrderController {
     }
 
     public Invoice generateInvoice(Order order) throws SQLException {
-        Invoice invoice = new Invoice(order.getId(), order, order.getDate(), order.getTotalPrice()); // figure out invoice id
+        Invoice invoice = new Invoice(order.getId(), order, order.getDate(), order.getTotalPrice()); // TODO: figure out invoice id
         invoiceDBIF.createInvoice(invoice);
         return invoice;
     }

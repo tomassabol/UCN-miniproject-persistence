@@ -9,10 +9,10 @@ import model.*;
 
 public class StorageLineDB implements StorageLineDBIF {
     private static final String FIND_ALL = "SELECT Id, ProductId, Quantity, StorageId FROM StorageLines";
-    private static final String FIND_ORDERLINE_BY_ID = "SELECT Id, ProductId, Quantity, StorageId FROM StorageLines WHERE ProductId=?";
-    private static final String CREATE_ORDERLINE = "INSERT INTO StorageLines (Id, ProductId, Quantity, StorageId) values(?, ?, ?, ?) ";
-    private static final String UPDATE_ORDERLINE = "UPDATE StorageLines SET Quantity = ? FROM StorageLines WHERE ProductId = ?";
-    private static final String DELETE_ORDERLINE = "DELETE FROM StorageLines WHERE Id = ?";
+    private static final String FIND_STORAGELINE_BY_ID = "SELECT Id, ProductId, Quantity, StorageId FROM StorageLines WHERE ProductId=?";
+    private static final String CREATE_STORAGELINE = "INSERT INTO StorageLines (Id, ProductId, Quantity, StorageId) values(?, ?, ?, ?) ";
+    private static final String UPDATE_STORAGELINE = "UPDATE StorageLines SET Quantity = ? FROM StorageLines WHERE ProductId = ?";
+    private static final String DELETE_STORAGELINE = "DELETE FROM StorageLines WHERE Id = ?";
 
     private PreparedStatement findAll;
 	private PreparedStatement findById;
@@ -22,10 +22,10 @@ public class StorageLineDB implements StorageLineDBIF {
 
     public StorageLineDB() throws SQLException {
         findAll = DBConnection.getInstance().getConnection().prepareStatement(FIND_ALL);
-	    findById = DBConnection.getInstance().getConnection().prepareStatement(FIND_ORDERLINE_BY_ID);
-	    createStorageLine = DBConnection.getInstance().getConnection().prepareStatement(CREATE_ORDERLINE);
-	    updateStorageLine = DBConnection.getInstance().getConnection().prepareStatement(UPDATE_ORDERLINE);
-	    deleteStorageLine = DBConnection.getInstance().getConnection().prepareStatement(DELETE_ORDERLINE);
+	    findById = DBConnection.getInstance().getConnection().prepareStatement(FIND_STORAGELINE_BY_ID);
+	    createStorageLine = DBConnection.getInstance().getConnection().prepareStatement(CREATE_STORAGELINE);
+	    updateStorageLine = DBConnection.getInstance().getConnection().prepareStatement(UPDATE_STORAGELINE);
+	    deleteStorageLine = DBConnection.getInstance().getConnection().prepareStatement(DELETE_STORAGELINE);
     }
 
     @Override
@@ -45,21 +45,21 @@ public class StorageLineDB implements StorageLineDBIF {
         return storageLine;
     }
     @Override
-    public void createOrderLine(StorageLine storageLine) throws SQLException {
+    public void createStorageLine(StorageLine storageLine) throws SQLException {
         createStorageLine.setInt(1, storageLine.getProduct().getId());
         createStorageLine.setInt(2, storageLine.getQuantity());
         createStorageLine.setInt(3, storageLine.getStorage().getId());
         createStorageLine.execute();
     }
     @Override
-    public void updateOrderLine(StorageLine storageLine) throws SQLException {
+    public void updateStorageLine(StorageLine storageLine) throws SQLException {
         updateStorageLine.setInt(1, storageLine.getProduct().getId());
         updateStorageLine.setInt(2, storageLine.getQuantity());
         updateStorageLine.setInt(3, storageLine.getStorage().getId());
         updateStorageLine.execute();
     }
     @Override
-    public void deleteOrderLine(StorageLine storageLine) throws SQLException {
+    public void deleteStorageLine(StorageLine storageLine) throws SQLException {
         deleteStorageLine.setInt(1, storageLine.getId());
         deleteStorageLine.execute();
     }
