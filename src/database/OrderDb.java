@@ -8,7 +8,7 @@ import java.sql.*;
 import database.interfaces.OrderDBIF;
 import model.*;
 
-public class OrderDB implements OrderDBIF {
+public class OrderDb implements OrderDBIF {
 
     private static final String FIND_ALL = "SELECT Id, Date, TotalPrice, Customerid FROM Orders";
     private static final String FIND_ORDER_BY_ID = "SELECT Id, Date, TotalPrice, Customerid FROM Orders WHERE Id=?";
@@ -22,7 +22,7 @@ public class OrderDB implements OrderDBIF {
 	private PreparedStatement updateOrder;
 	private PreparedStatement deleteOrder;
 
-    public OrderDB() throws SQLException {
+    public OrderDb() throws SQLException {
         findAll = DBConnection.getInstance().getConnection().prepareStatement(FIND_ALL);
 	    findOrderById = DBConnection.getInstance().getConnection().prepareStatement(FIND_ORDER_BY_ID);
 	    createOrder = DBConnection.getInstance().getConnection().prepareStatement(CREATE_ORDER);
