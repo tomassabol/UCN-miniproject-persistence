@@ -15,7 +15,7 @@ public class ProductController {
 	 * Fields for class ProductController
 	 */
 	private ProductDBIF productDBIF;
-	//private SupplierController supplierCtrl;
+	private SupplierController supplierCtrl;
 	
 	/**
 	 * Constructor for class ProductController
@@ -23,6 +23,7 @@ public class ProductController {
 	 */
 	public ProductController() throws SQLException {
 		productDBIF = new ProductDB();
+		supplierCtrl = new SupplierController();
 	}
 	
 	/**
@@ -86,5 +87,8 @@ public class ProductController {
 		productDBIF.updateProduct(product);
 	}
 	
-	//TODO: Add find supplier once SupplierController is done
+	public Supplier findSupplierById(int id) throws SQLException {
+		return supplierCtrl.findSupplierById(id);
+	}
+	
 }
