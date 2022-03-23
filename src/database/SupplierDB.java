@@ -37,7 +37,7 @@ public class SupplierDB implements SupplierDBIF {
     }
 
     @Override
-    public Supplier findStorageById(int id) throws SQLException {
+    public Supplier findSupplierById(int id) throws SQLException {
         Supplier supplier = null;
         ResultSet rs;
         findSupplierById.setInt(1, id);
