@@ -7,6 +7,7 @@ drop table if exists Customers;
 drop table if exists CustomerTypes;
 drop table if exists Orders;
 drop table if exists OrderProducts;
+drop table if exists Invoices;
 
 create table Suppliers(
     Id int identity(1,1) primary key,
@@ -80,4 +81,12 @@ create table StorageLines(
     Quantity int,
     StorageId int,
     foreign key (StorageId) references Storages(Id)
+);
+
+create table Invoices(
+    Id int identity(1,1),
+    OrderId int,
+    foreign key (OrderId) references Orders(Id),
+    [Date] date,
+    Price smallmoney
 );
