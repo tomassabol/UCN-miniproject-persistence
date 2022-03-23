@@ -1,0 +1,57 @@
+1. Order menu
+2. Customer menu
+3. Product menu
+4. Supplier menu
+5. Stock menu
+0. Quit
+
+<--- Order menu --->
+1. Create new order
+2. List all orders
+3. Find an order
+4. Update order information
+5. Delete an order
+0. Back
+
+<--- Customer menu --->
+(Disclaimer: In order to create a new customer you need to have at least one customer type)
+1. Create new customer
+2. List all customers
+3. Find a customer
+4. Update customer information
+5. Delete a customer
+6. Customer types menu
+0. Back
+
+<--- Customer types menu --->
+1. Create a new customer type
+2. List all customer types
+3. Find a customer type
+4. Update customer type information
+5. Delete a customer type
+0. Back
+
+<--- Product menu --->
+(Disclaimer: You need to have a supplier to create a product)
+1. Create product
+2. List all products
+3. Find a product
+4. Update product information
+5. Delete a product
+0. Back
+
+<--- Supplier menu --->
+1. Create supplier
+2. List all suppliers
+3. Find a supplier
+4. Update supplier information
+5. Delete a supplier
+0. Back
+
+<--- Stock menu --->
+1. Create storage
+2. List all storages
+3. Find a storage
+4. Update storage information
+5. Delete a storage
+0. Back
