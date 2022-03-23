@@ -72,9 +72,17 @@ public class ProductController {
 	/**
 	 * Updates a products attributes
 	 * @param product The product that will be updated
+	 * @param name The new name of the product
+	 * @param price The new price of the product
+	 * @param inStock The new available stock of the product
+	 * @param supplier The new supplier of the product
 	 * @throws SQLException
 	 */
-	public void updateProduct(Product product) throws SQLException {
+	public void updateProduct(Product product, String name, BigDecimal price, int inStock, Supplier supplier) throws SQLException {
+		product.setName(name);
+		product.setPrice(price);
+		product.setInStock(inStock);
+		product.setSupplier(supplier);
 		productDBIF.updateProduct(product);
 	}
 	

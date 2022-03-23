@@ -36,9 +36,10 @@ public class CustomerDB implements CustomerDBIF {
     }
 
     @Override
-    public Customer findCustomerById() throws SQLException {
+    public Customer findCustomerById(int id) throws SQLException {
         Customer customer = null;
         ResultSet rs;
+        findCustomerById.setInt(1, id);
         rs = findCustomerById.executeQuery();
         rs.next();
         customer = buildObject(rs);
