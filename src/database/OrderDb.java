@@ -8,7 +8,7 @@ import java.sql.*;
 import database.interfaces.OrderDBIF;
 import model.*;
 
-public class OrderDb implements OrderDBIF{
+public class OrderDb implements OrderDBIF {
 
     private static final String FIND_ALL = "SELECT Id, Date, TotalPrice, Customerid FROM Orders";
     private static final String FIND_ORDER_BY_ID = "SELECT Id, Date, TotalPrice, Customerid FROM Orders WHERE Id=?";
@@ -22,7 +22,7 @@ public class OrderDb implements OrderDBIF{
 	private PreparedStatement updateOrder;
 	private PreparedStatement deleteOrder;
 
-    OrderDb()throws SQLException{
+    public OrderDb() throws SQLException {
         findAll = DBConnection.getInstance().getConnection().prepareStatement(FIND_ALL);
 	    findOrderById = DBConnection.getInstance().getConnection().prepareStatement(FIND_ORDER_BY_ID);
 	    createOrder = DBConnection.getInstance().getConnection().prepareStatement(CREATE_ORDER);
@@ -31,7 +31,7 @@ public class OrderDb implements OrderDBIF{
     }
 
     @Override
-    public List<Order> findAll() throws SQLException{
+    public List<Order> findAll() throws SQLException {
         ResultSet rs;
         rs = findAll.executeQuery();
         List<Order> orders = buildObjects(rs);
@@ -39,7 +39,7 @@ public class OrderDb implements OrderDBIF{
     }
 
     @Override
-    public Order findOrderById(int id) throws SQLException{
+    public Order findOrderById(int id) throws SQLException {
         Order order = null;
         ResultSet rs;
         findOrderById.setInt(1, id);
@@ -50,7 +50,7 @@ public class OrderDb implements OrderDBIF{
     }
 
     @Override
-    public void createOrder(Order order) throws SQLException{
+    public void createOrder(Order order) throws SQLException {
         createOrder.setDate(1, order.getDate());
         createOrder.setBigDecimal(2, order.getTotalPrice());
         createOrder.setInt(3, order.getCustomer().getId());
@@ -58,7 +58,7 @@ public class OrderDb implements OrderDBIF{
     }
 
     @Override
-    public void updateOrder(Order order) throws SQLException{
+    public void updateOrder(Order order) throws SQLException {
         updateOrder.setDate(1, order.getDate());
         updateOrder.setBigDecimal(2, order.getTotalPrice());
         updateOrder.setInt(3, order.getCustomer().getId());
@@ -66,7 +66,7 @@ public class OrderDb implements OrderDBIF{
     }
 
     @Override
-    public void deleteOrder(Order order) throws SQLException{
+    public void deleteOrder(Order order) throws SQLException {
         deleteOrder.setInt(1, order.getId());
         deleteOrder.execute();
     }
