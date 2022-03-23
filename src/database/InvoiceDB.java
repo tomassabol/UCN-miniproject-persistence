@@ -5,13 +5,12 @@ import java.sql.*;
 import java.util.*;
 
 import database.interfaces.*;
-import model.Customer;
 import model.Invoice;
 
 public class InvoiceDB implements InvoiceDBIF{
-	private static final String FIND_ALL = "SELECT Id, OrderId FROM Invoices";
-	private static final String FIND_INVOICE_BY_ID = "SELECT Id, OrderId FROM Invoices WHERE Id=?";
-	private static final String CREATE_INVOICE = "INSERT INTO Invoices (Id, OrderId) values(?, ?)";
+	private static final String FIND_ALL = "SELECT Id, OrderId, [Date], Price FROM Invoices";
+	private static final String FIND_INVOICE_BY_ID = "SELECT Id, OrderId, [Date], Price FROM Invoices WHERE Id=?";
+	private static final String CREATE_INVOICE = "INSERT INTO Invoices (Id, OrderId, [Date], Price) values(?, ?, ?, ?)";
 	
 	private PreparedStatement findAll;
 	private PreparedStatement findInvoiceById;
