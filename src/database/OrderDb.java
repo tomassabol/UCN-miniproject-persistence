@@ -2,13 +2,13 @@ package database;
 
 import java.util.*;
 
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
+import controller.CustomerController;
 
 import java.sql.*;
 import database.interfaces.OrderDBIF;
 import model.*;
 
-public class OrderDb implements OrderDBIF {
+public class OrderDB implements OrderDBIF {
 
     private static final String FIND_ALL = "SELECT Id, Date, TotalPrice, Customerid FROM Orders";
     private static final String FIND_ORDER_BY_ID = "SELECT Id, Date, TotalPrice, Customerid FROM Orders WHERE Id=?";
@@ -22,7 +22,7 @@ public class OrderDb implements OrderDBIF {
 	private PreparedStatement updateOrder;
 	private PreparedStatement deleteOrder;
 
-    public OrderDb() throws SQLException {
+    public OrderDB() throws SQLException {
         findAll = DBConnection.getInstance().getConnection().prepareStatement(FIND_ALL);
 	    findOrderById = DBConnection.getInstance().getConnection().prepareStatement(FIND_ORDER_BY_ID);
 	    createOrder = DBConnection.getInstance().getConnection().prepareStatement(CREATE_ORDER);
@@ -76,6 +76,7 @@ public class OrderDb implements OrderDBIF {
         Customer customer = custCont.findCustomerById(rs.getInt("Id"));
 
         Order order = new Order(rs.getInt("Id"), rs.getDate("Date"), rs.getBigDecimal("Totalprice"), customer);
+        return order;
     }
 
     private List<Order> buildObjects(ResultSet rs) throws SQLException {
