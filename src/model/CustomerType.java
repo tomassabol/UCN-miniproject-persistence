@@ -4,9 +4,9 @@ public class CustomerType {
     
     private int id;
     private String name;
-    private int discount;
+    private String discount;
 
-    public CustomerType(int id, String name, int discount) {
+    public CustomerType(int id, String name, String discount) {
         this.id = id;
         this.name = name;
         this.discount = discount;
@@ -28,11 +28,11 @@ public class CustomerType {
         this.name = name;
     }
 
-    public int getDiscount() {
+    public String getDiscount() {
         return this.discount;
     }
 
-    public void setDiscount(int discount) {
+    public void setDiscount(String discount) {
         this.discount = discount;
     }
 
