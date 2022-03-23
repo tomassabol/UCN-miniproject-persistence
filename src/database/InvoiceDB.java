@@ -4,8 +4,10 @@ import java.sql.*;
 
 import java.util.*;
 
+import controller.OrderController;
 import database.interfaces.*;
 import model.Invoice;
+import model.Order;
 
 public class InvoiceDB implements InvoiceDBIF{
 	private static final String FIND_ALL = "SELECT Id, OrderId, [Date], Price FROM Invoices";
@@ -49,7 +51,10 @@ public class InvoiceDB implements InvoiceDBIF{
 	}
 	
 	private Invoice buildObject(ResultSet rs) throws SQLException {
-        Invoice invoice = new Invoice(rs.getInt("Id"), rs.getInt("OrderId"), rs.getDate("[Date]"), rs.getBigDecimal("Price"));
+		OrderController orderCtrl = new OrderController();
+		Order order = orderCtrl.findOrderById(rs.getInt("OrderId")); 
+		
+        Invoice invoice = new Invoice(rs.getInt("Id"),order, rs.getDate("[Date]"), rs.getBigDecimal("Price"));
         return invoice;
     }
 	

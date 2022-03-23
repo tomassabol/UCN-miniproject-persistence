@@ -1,6 +1,9 @@
 package database;
 
 import java.util.*;
+
+import controller.*;
+
 import java.sql.*;
 
 import database.interfaces.ProductDBIF;
@@ -72,14 +75,15 @@ public class ProductDB implements ProductDBIF {
     }
 
     private Product buildObject(ResultSet rs) throws SQLException {
-        SupplierController supplierCtrl = new SupplierCtrl();
+        SupplierController supplierCtrl = new SupplierController();
         Supplier supplier = supplierCtrl.findSupplierById(rs.getInt("Supplier"));
 
         StorageLineController storageLineCtrl = new StorageLineController();
-        StorageLine storageLine = storageLineCtrl.findByProductId(rs.getInt("Id"));
+        StorageLine storageLine = storageLineCtrl.findStorageLinebyId(rs.getInt("Id"));
         int quantity = storageLine.getQuantity();
 
         Product product = new Product(rs.getInt("Id"), rs.getString("Name"), rs.getBigDecimal("Price"), quantity, supplier);
+        return product;
     }
 
     private List<Product> buildObjects(ResultSet rs) throws SQLException {

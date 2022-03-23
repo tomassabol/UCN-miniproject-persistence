@@ -48,7 +48,7 @@ public class SupplierDB implements SupplierDBIF {
     }
 
     @Override
-    public void createStorage(Supplier supplier) throws SQLException {
+    public void createSupplier(Supplier supplier) throws SQLException {
         createSupplier.setString(1, supplier.getName());
         createSupplier.setString(2, supplier.getAddress());
         createSupplier.setString(3, supplier.getCountry());
@@ -58,7 +58,7 @@ public class SupplierDB implements SupplierDBIF {
     }
 
     @Override
-    public void updateStorage(Supplier supplier) throws SQLException {
+    public void updateSupplier(Supplier supplier) throws SQLException {
         updateSupplier.setString(1, supplier.getName());
         updateSupplier.setString(2, supplier.getAddress());
         updateSupplier.setString(3, supplier.getCountry());
@@ -68,7 +68,7 @@ public class SupplierDB implements SupplierDBIF {
     }
 
     @Override
-    public void deleteStorage(Supplier supplier) throws SQLException {
+    public void deleteSupplier(Supplier supplier) throws SQLException {
         deleteSupplier.setInt(1, supplier.getId());
         deleteSupplier.execute();
     }
