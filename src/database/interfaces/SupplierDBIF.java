@@ -7,8 +7,8 @@ import model.Supplier;
 
 public interface SupplierDBIF {
     public List<Supplier> findAll() throws SQLException;
-    public Supplier findStorageById(int id) throws SQLException;
-    public void createStorage(Supplier supplier) throws SQLException;
-    public void updateStorage(Supplier supplier) throws SQLException;
-    public void deleteStorage(Supplier supplier) throws SQLException;
+    public Supplier findSupplierById(int id) throws SQLException;
+    public void createSupplier(Supplier supplier) throws SQLException;
+    public void updateSupplier(Supplier supplier) throws SQLException;
+    public void deleteSupplier(Supplier supplier) throws SQLException;
 }
