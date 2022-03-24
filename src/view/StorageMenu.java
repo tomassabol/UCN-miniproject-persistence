@@ -3,8 +3,6 @@ package view;
 import java.sql.SQLException;
 
 import controller.StorageController;
-import model.Customer;
-import model.Order;
 import model.Storage;
 
 public class StorageMenu {

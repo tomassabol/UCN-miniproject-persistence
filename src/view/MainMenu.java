@@ -42,7 +42,8 @@ public class MainMenu {
                     break;
                 }
                 case 5: {
-
+                	StorageMenu storageMenu = new StorageMenu();
+                	storageMenu.run();
                     break;
                 }
                 case 0: {
