@@ -49,24 +49,22 @@ public class SupplierDB implements SupplierDBIF {
 
     @Override
     public void createSupplier(Supplier supplier) throws SQLException {
-        int id;
         createSupplier.setString(1, supplier.getName());
         createSupplier.setString(2, supplier.getAddress());
         createSupplier.setString(3, supplier.getCountry());
         createSupplier.setString(4, supplier.getPhone());
         createSupplier.setString(5, supplier.getEmail());
-        id = DBConnection.getInstance().executeInsertWithIdentity(createSupplier);
+        createSupplier.execute();
     }
 
     @Override
     public void updateSupplier(Supplier supplier) throws SQLException {
-        int id;
         updateSupplier.setString(1, supplier.getName());
         updateSupplier.setString(2, supplier.getAddress());
         updateSupplier.setString(3, supplier.getCountry());
         updateSupplier.setString(4, supplier.getPhone());
         updateSupplier.setString(5, supplier.getEmail());
-        id = DBConnection.getInstance().executeUpdate(updateSupplier);
+        updateSupplier.execute();
     }
 
     @Override

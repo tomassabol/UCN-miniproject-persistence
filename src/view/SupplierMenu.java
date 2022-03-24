@@ -94,7 +94,7 @@ public class SupplierMenu {
     
     public Supplier findSupplierById() throws SQLException {
     	listAllSuppliers();
-    	int id = input.integerInput("Enter supplier`s ID:");
+    	int id = input.integerInput("Enter supplier`s ID: ");
     	Supplier supplier = supplierCtrl.findSupplierById(id);
     	System.out.println(supplier.toString());
     	return supplier;
@@ -102,7 +102,7 @@ public class SupplierMenu {
     
     public void updateSupplier() throws SQLException {
     	listAllSuppliers();
-    	int id = input.integerInput("Enter supplier`s ID:");
+    	int id = input.integerInput("Enter supplier`s ID: ");
     	Supplier supplier = supplierCtrl.findSupplierById(id);
     	
     	String name = input.stringInput("Add supplier`s name: ");

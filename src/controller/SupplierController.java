@@ -3,12 +3,17 @@ package controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import database.SupplierDB;
 import database.interfaces.SupplierDBIF;
 import model.Supplier;
 
 public class SupplierController {
 
 	private SupplierDBIF supplierDBIF;
+
+	public SupplierController() throws SQLException {
+		supplierDBIF = new SupplierDB();
+	}
 	
 	/**
 	 * Lists all the Suppliers in the database
