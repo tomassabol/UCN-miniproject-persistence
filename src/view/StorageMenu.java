@@ -59,39 +59,7 @@ public class StorageMenu {
             }
         }
     }
-
-	private void deleteStorage() throws SQLException {
-		Storage storage = findStorageById();
-    	storageCtrl.deleteStorage(storage);
-	}
-
-	private void updateStorage() throws SQLException {
-		listAllStorage();
-    	int id = input.integerInput("Enter storage's id: ");
-    	Storage storage= storageCtrl.findStorageById(id);
-    	
-    	String name = input.stringInput("Enter sotrage's name: ");
-    	String address = input.stringInput("Enter storage's address: ");
-    	
-    	storageCtrl.updateStorage(storage, name, address);
-	}
-
-	public Storage findStorageById() throws SQLException {
-		listAllStorage();
-    	int id = input.integerInput("Enter storage's id: ");
-    	Storage storage= storageCtrl.findStorageById(id);
-    	System.out.println(storage.toString());
-    	return storage;
-	}
-
-	private void listAllStorage() throws SQLException {
-		clearLines();
-    	
-    	for(Storage storage : storageCtrl.findAll()) {
-    		System.out.println(storage.toString());
-    	}
-	}
-
+	
 	private void createStorage() throws SQLException {
 		clearLines();
 		
@@ -99,6 +67,37 @@ public class StorageMenu {
 		String address = input.stringInput("Enter storage's address: ");
 		
 		storageCtrl.createStorage(name, address);
+	}
+	
+	private void listAllStorage() throws SQLException {
+		clearLines();
+		
+		for(Storage storage : storageCtrl.findAll()) {
+			System.out.println(storage.toString());
+		}
+	}
+	
+	public Storage findStorageById() throws SQLException {
+		listAllStorage();
+    	int id = input.integerInput("Enter storage's id: ");
+    	Storage storage= storageCtrl.findStorageById(id);
+    	System.out.println(storage.toString());
+    	return storage;
+	}
+	
+	private void updateStorage() throws SQLException {
+		listAllStorage();
+		Storage storage = findStorageById();
+		
+		String name = input.stringInput("Enter storage's name: ");
+		String address = input.stringInput("Enter storage's address: ");
+		
+		storageCtrl.updateStorage(storage, name, address);
+	}
+	
+	private void deleteStorage() throws SQLException {
+		Storage storage = findStorageById();
+		storageCtrl.deleteStorage(storage);
 	}
 	
 	 public void clearLines() {

@@ -49,18 +49,16 @@ public class StorageDB implements StorageDBIF {
 
     @Override
     public void createStorage(Storage storage) throws SQLException {
-    	int id;
         createStorage.setString(1, storage.getName());
         createStorage.setString(2, storage.getAddress());
-        id = DBConnection.getInstance().executeInsertWithIdentity(createStorage);
+        createStorage.execute();
     }
 
     @Override
     public void updateStorage(Storage storage) throws SQLException {
-        int id;
         updateStorage.setString(1, storage.getName());
         updateStorage.setString(2, storage.getAddress());
-        id = DBConnection.getInstance().executeUpdate(updateStorage);
+        updateStorage.execute();
     }
 
     @Override
