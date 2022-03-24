@@ -6,6 +6,7 @@ import java.util.List;
 import database.CustomerDB;
 import database.interfaces.CustomerDBIF;
 import model.Customer;
+import model.CustomerType;
 
 public class CustomerController {
     
@@ -50,8 +51,8 @@ public class CustomerController {
      * @param email The email of the new Customer
      * @throws SQLException
      */
-    public void createCustomer(String name, String address, String city, String phoneNumber, String email) throws SQLException {
-        Customer customer = new Customer(name, address, city, phoneNumber, email);
+    public void createCustomer(String name, String address, String city, String phoneNumber, String email, CustomerType customerType) throws SQLException {
+        Customer customer = new Customer(name, address, city, phoneNumber, email, customerType);
         customerDBIF.createCustomer(customer);
     }
 
@@ -74,12 +75,13 @@ public class CustomerController {
      * @param email The new email of the customer
      * @throws SQLException
      */
-    public void updateCustomer(Customer customer, String name, String address, String city, String phoneNumber, String email) throws SQLException {
+    public void updateCustomer(Customer customer, String name, String address, String city, String phoneNumber, String email, CustomerType customerType) throws SQLException {
         customer.setName(name);
         customer.setAddress(address);
         customer.setCity(city);
         customer.setPhoneNumber(phoneNumber);
         customer.setEmail(email);
+        customer.setCustomerType(customerType);
         customerDBIF.updateCustomer(customer);
     }
 }

@@ -8,8 +8,8 @@ import model.CustomerType;
 
 public class CustomerTypeDB implements CustomerTypeDBIF {
 	
-	private static final String FIND_ALL = "SELECT Name, Discount FROM CustomerTypes ";
-	private static final String FIND_CUSTOMERTYPE_BY_ID = "SELECT Name, Discount FROM CustomerTypes WHERE Id=?";
+	private static final String FIND_ALL = "SELECT Id, Name, Discount FROM CustomerTypes ";
+	private static final String FIND_CUSTOMERTYPE_BY_ID = "SELECT Id, Name, Discount FROM CustomerTypes WHERE Id=?";
 	private static final String CREATE_CUSTOMERTYPE = "INSERT INTO CustomerTypes (Name, Discount) values(?, ?) ";
 	private static final String UPDATE_CUSTOMERTYPE = "UPDATE CustomerTypes SET Name = ?, Discount = ? FROM CustomerTypes WHERE Id = ?";
 	private static final String DELETE_CUSTOMERTYPE = "DELETE FROM CustomerTypes WHERE Id = ?";
@@ -50,18 +50,16 @@ public class CustomerTypeDB implements CustomerTypeDBIF {
 	
 	@Override
 	public void createCustomerType(CustomerType customerType) throws SQLException {
-		int id;
 		createCustomerType.setString(1, customerType.getName());
 		createCustomerType.setInt(2, customerType.getDiscount());
-		id = DBConnection.getInstance().executeInsertWithIdentity(createCustomerType);
+		createCustomerType.execute();
 	}
 	
 	@Override
 	public void updateCustomerType(CustomerType customerType) throws SQLException {
-		int id;
 		updateCustomerType.setString(1, customerType.getName());
 		updateCustomerType.setInt(2, customerType.getDiscount());
-		id = DBConnection.getInstance().executeUpdate(updateCustomerType);
+		updateCustomerType.execute();
 	}
 	
 	@Override
@@ -82,10 +80,5 @@ public class CustomerTypeDB implements CustomerTypeDBIF {
 		}
 		return customerType;
 	}
-	
-	
-	
-	
-	
 
 }

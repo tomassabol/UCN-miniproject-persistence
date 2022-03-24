@@ -11,28 +11,28 @@ public class Customer {
     private String city;
     private String phoneNumber;
     private String email;
-    //private CustomerType customerType;
+    private CustomerType customerType;
 
     /**
      * Constructor for class Customer
      */
-    public Customer(int id, String name, String address, String city, String phoneNumber, String email) { // don't do CustomerType customerType for now
+    public Customer(int id, String name, String address, String city, String phoneNumber, String email, CustomerType customerType) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.city = city;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        //this.customerType = customerType;
+        this.customerType = customerType;
     }
 
-    public Customer(String name, String address, String city, String phoneNumber, String email) { // don't do CustomerType customerType for now
+    public Customer(String name, String address, String city, String phoneNumber, String email, CustomerType customerType) {
         this.name = name;
         this.address = address;
         this.city = city;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        //this.customerType = customerType;
+        this.customerType = customerType;
     }
     
     public int getId() {
@@ -79,7 +79,6 @@ public class Customer {
         this.email = email;
     }
 
-    /*
     public CustomerType getCustomerType() {
         return this.customerType;
     }
@@ -87,10 +86,9 @@ public class Customer {
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
     }
-    */
 
     public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", address=" + address + ", city=" + city + ", city=" + city + ", phone number=" + phoneNumber + ", email=" + email + "]";
+		return "Customer [id=" + id + ", name=" + name + ", address=" + address + ", city=" + city + ", city=" + city + ", phone number=" + phoneNumber + ", email=" + email + ", customer type= " + customerType.getName() +"]";
 	}
     
 }

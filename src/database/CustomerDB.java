@@ -3,14 +3,16 @@ package database;
 import java.sql.*;
 import java.util.*;
 
+import controller.CustomerTypeController;
 import database.interfaces.*;
 import model.Customer;
+import model.CustomerType;
 
 public class CustomerDB implements CustomerDBIF {
-    private static final String FIND_ALL = "SELECT Id, Name, Address, City, Phone, Email FROM Customers";
-    private static final String FIND_CUSTOMER_BY_ID = "SELECT Id, Name, Address, City, Phone, Email FROM Customers WHERE Id=?";
-    private static final String CREATE_CUSTOMER = "INSERT INTO Customers (Name, Address, City, Phone, Email) values(?, ?, ?, ?, ?)";
-    private static final String UPDATE_CUSTOMER = "UPDATE Customers SET Name = ?, Address = ?, City = ?, Phone = ?, Email = ? FROM Customers WHERE Id = ?";
+    private static final String FIND_ALL = "SELECT [Id],[Name],[Address],[City],[Phone],[Email],[CustomerTypeId] FROM Customers";
+    private static final String FIND_CUSTOMER_BY_ID = "SELECT [Id],[Name],[Address],[City],[Phone],[Email],[CustomerTypeId] FROM Customers WHERE Id=?";
+    private static final String CREATE_CUSTOMER = "INSERT INTO Customers (Name, Address, City, Phone, Email, CustomerTypeId) values(?, ?, ?, ?, ?, ?)";
+    private static final String UPDATE_CUSTOMER = "UPDATE Customers SET Name = ?, Address = ?, City = ?, Phone = ?, Email = ?, CustomerTypeId = ? FROM Customers WHERE Id = ?";
     private static final String DELETE_CUSTOMER = "DELETE FROM Customers WHERE Id = ?";
 
     private PreparedStatement findAll;
@@ -48,24 +50,24 @@ public class CustomerDB implements CustomerDBIF {
 
     @Override
     public void createCustomer(Customer customer) throws SQLException {
-        int id;
         createCustomer.setString(1, customer.getName());
         createCustomer.setString(2, customer.getAddress());
         createCustomer.setString(3, customer.getCity());
         createCustomer.setString(4, customer.getPhoneNumber());
         createCustomer.setString(5, customer.getEmail());
-        id = DBConnection.getInstance().executeInsertWithIdentity(createCustomer);
+        createCustomer.setInt(6, customer.getCustomerType().getId());
+        createCustomer.execute();
     }
 
     @Override
     public void updateCustomer(Customer customer) throws SQLException {
-        int id;
         updateCustomer.setString(1, customer.getName());
         updateCustomer.setString(2, customer.getAddress());
         updateCustomer.setString(3, customer.getCity());
         updateCustomer.setString(4, customer.getPhoneNumber());
         updateCustomer.setString(5, customer.getEmail());
-        id = DBConnection.getInstance().executeUpdate(updateCustomer);
+        updateCustomer.setInt(6, customer.getCustomerType().getId());
+        updateCustomer.execute();
     }
 
     @Override
@@ -75,7 +77,12 @@ public class CustomerDB implements CustomerDBIF {
     }
 
     private Customer buildObject(ResultSet rs) throws SQLException {
-        Customer customer = new Customer(rs.getInt("Id"), rs.getString("Name"), rs.getString("Address"), rs.getString("City"), rs.getString("Phone"), rs.getString("Email"));
+        // build customer type object
+        CustomerTypeController customerTypeCtrl = new CustomerTypeController();
+        CustomerType customerType = customerTypeCtrl.findCustomerTypeById(rs.getInt("CustomerTypeId"));
+
+        // build customer object
+        Customer customer = new Customer(rs.getInt("Id"), rs.getString("Name"), rs.getString("Address"), rs.getString("City"), rs.getString("Phone"), rs.getString("Email"), customerType);
         return customer;
     }
     private List<Customer> buildObjects(ResultSet rs) throws SQLException {
