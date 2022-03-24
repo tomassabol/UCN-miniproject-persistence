@@ -1,4 +1,4 @@
-package controller;
+	package controller;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -59,7 +59,7 @@ public class StorageController {
      * @throws SQLException
      */
 
-    public void deleteCustomer(Storage storage) throws SQLException {
+    public void deleteStorage(Storage storage) throws SQLException {
         StorageDBIF.deleteStorage(storage);
     }
 
