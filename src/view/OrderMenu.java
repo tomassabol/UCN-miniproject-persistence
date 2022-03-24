@@ -2,9 +2,7 @@ package view;
 
 import java.sql.SQLException;
 
-import controller.CustomerController;
 import controller.OrderController;
-import controller.ProductController;
 //import controller.StorageLineController;
 import model.Customer;
 import model.Order;
@@ -14,15 +12,17 @@ import model.Product;
 
 public class OrderMenu {
     private OrderController orderCtrl;
-    private CustomerController customerCtrl;
-    private ProductController productCtrl;
+    
+    private CustomerMenu customerMenu;
+    private ProductMenu productMenu;
     //private StorageLineController storageLineCtrl;
     private Input input;
 
     public OrderMenu() throws SQLException {
         orderCtrl = new OrderController();
-        customerCtrl = new CustomerController();
-        productCtrl = new ProductController();
+
+        customerMenu = new CustomerMenu();
+        productMenu = new ProductMenu();
         //storageLineCtrl = new StorageLineController();
         input = new Input();
     }
@@ -75,18 +75,15 @@ public class OrderMenu {
 
     public void createOrder() throws SQLException {
         clearLines();
-
-        listAllCustomers();
         
-        int customerId = input.integerInput("Enter Customer ID: ");
-        Customer customer = customerCtrl.findCustomerById(customerId);
+        Customer customer = customerMenu.findCustomerById();
         
         Order order = orderCtrl.startOrder(customer);
 
 
         boolean conTinUe = true;
         ListChoice<Integer> menu = new ListChoice<>();
-        menu.addOption("Quit", 0);
+        menu.addOption("Go Back to Order Menu", 0);
         menu.addOption("Add product", 1);
         menu.addOption("Finish Order", 2);
 
@@ -97,16 +94,13 @@ public class OrderMenu {
             int choice = menu.input("Choose Option", false);
             switch(choice) {
                 case 1: {
-                    listAllProducts();
 
-                    int productId = input.integerInput("Enter Product ID: ");
-                    Product product = productCtrl.findProductById(productId);
+                    Product product = productMenu.findProductById();
 
                     int quantity = input.integerInput("Enter Quantity: ");
-                    
+                
 
-
-                    OrderLine orderLine = new OrderLine(productId, product, quantity);
+                    OrderLine orderLine = new OrderLine(product.getId(), product, quantity);
                     order.addOrderLine(orderLine);
 
                     //StorageLine storageLine = storageLineCtrl.findStorageLinebyId(productId); // TODO: crete storage line when creating product. Storageline and product will have same ID
@@ -115,6 +109,7 @@ public class OrderMenu {
                 }
                 case 2: {
                     orderCtrl.finishOrder(order);
+                    conTinUe = false;
                     break;
                 }
                 case 0: {
@@ -161,15 +156,4 @@ public class OrderMenu {
         }
     }
 
-    public void listAllCustomers() throws SQLException {
-        for (Customer customer : customerCtrl.findAll()) {
-            System.out.println(customer.toString());
-        }
-    }
-
-    public void listAllProducts() throws SQLException {
-        for (Product product : productCtrl.findAll()) {
-            System.out.println(product.toString());
-        }
-    }
 }

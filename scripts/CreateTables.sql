@@ -71,6 +71,7 @@ create table Products(
 );
 
 create table OrderProducts(
+    Id int identity(1,1) primary key,
     ProductId int,
     foreign key (ProductId) references Products(Id),
     Quantity int,

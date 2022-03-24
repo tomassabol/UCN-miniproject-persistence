@@ -142,7 +142,6 @@ public class CustomerMenu {
     	String phoneNumber = input.stringInput("Enter customer's phone number: ");
     	String email = input.stringInput("Enter customer's email: ");
 
-        listAllCustomerTypes();
         CustomerType customerType = findCustomerTypeById();
     	
     	customerCtrl.updateCustomer(customer, name, address, city, phoneNumber, email, customerType);
