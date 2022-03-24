@@ -47,12 +47,12 @@ VALUES('2022-02-02','2000')
 INSERT INTO Invoices(date,Price)
 VALUES('2033-03-03','3000')
 
-INSERT INTO Products(Name,Price,ProductTypeId,SupplierId)
-VALUES('name11', CAST('11.1' as Money), 1,1);
-INSERT INTO Products(Name,Price,ProductTypeId,SupplierId)
-VALUES('name2', CAST('22.2' as Money), 2,2);
-INSERT INTO Products(Name,Price,ProductTypeId,SupplierId)
-VALUES('name3', CAST('33.3' as Money), 3,3);
+INSERT INTO Products(Name,Price,SupplierId)
+VALUES('name11', CAST('11.1' as Money),1);
+INSERT INTO Products(Name,Price,SupplierId)
+VALUES('name2', CAST('22.2' as Money),2);
+INSERT INTO Products(Name,Price,SupplierId)
+VALUES('name3', CAST('33.3' as Money),3);
 
 INSERT INTO StorageLines(ProductId,Quantity,StorageId)
 VALUES(1,1,1);

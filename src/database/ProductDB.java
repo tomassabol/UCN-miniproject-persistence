@@ -11,10 +11,10 @@ import model.*;
 
 public class ProductDB implements ProductDBIF {
 
-    private static final String FIND_ALL = "SELECT Id, Name, Price, inStock, ProductTypeId, SupplierId FROM Products";
-    private static final String FIND_PRODUCT_BY_ID = "SELECT Id, Name, Price, inStock, ProductTypeId, SupplierId FROM Products WHERE Id = ?";
-    private static final String CREATE_PRODUCT = "INSERT INTO Products (Name, Price, inStock, ProductTypeId, SupplierId) values(?, ?, ?, ?, ?) ";
-    private static final String UPDATE_PRODUCT = "UPDATE Products SET Name = ?, Price = ?, inStock = ?, ProductTypeId = ?, SupplierId = ? FROM Products WHERE Id = ?";
+    private static final String FIND_ALL = "SELECT Id, Name, Price, SupplierId FROM Products";
+    private static final String FIND_PRODUCT_BY_ID = "SELECT Id, Name, Price, SupplierId FROM Products WHERE Id = ?";
+    private static final String CREATE_PRODUCT = "INSERT INTO Products (Name, Price, SupplierId) values(?, ?, ?) ";
+    private static final String UPDATE_PRODUCT = "UPDATE Products SET Name = ?, Price = ?, SupplierId = ? FROM Products WHERE Id = ?";
     private static final String DELETE_PRODUCT = "DELETE FROM Products WHERE Id = ?";
 
     private PreparedStatement findAll;
@@ -52,22 +52,18 @@ public class ProductDB implements ProductDBIF {
 
     @Override
     public void createProduct(Product product) throws SQLException {
-        int id;
         createProduct.setString(1, product.getName());
         createProduct.setBigDecimal(2, product.getPrice());
-        createProduct.setInt(3, product.getInStock());
-        createProduct.setInt(4, product.getSupplier().getId());
-        id = DBConnection.getInstance().executeInsertWithIdentity(createProduct);
+        createProduct.setInt(3, product.getSupplier().getId());
+        createProduct.execute();        
     }
 
     @Override
     public void updateProduct(Product product) throws SQLException {
-        int id;
         updateProduct.setString(1, product.getName());
         updateProduct.setBigDecimal(2, product.getPrice());
-        updateProduct.setInt(3, product.getInStock());
-        updateProduct.setInt(4, product.getSupplier().getId());
-        id = DBConnection.getInstance().executeUpdate(updateProduct);
+        updateProduct.setInt(3, product.getSupplier().getId());
+        updateProduct.execute();
     }
 
     @Override
@@ -78,13 +74,9 @@ public class ProductDB implements ProductDBIF {
 
     private Product buildObject(ResultSet rs) throws SQLException {
         SupplierController supplierCtrl = new SupplierController();
-        Supplier supplier = supplierCtrl.findSupplierById(rs.getInt("Supplier"));
+        Supplier supplier = supplierCtrl.findSupplierById(rs.getInt("SupplierId"));
 
-        StorageLineController storageLineCtrl = new StorageLineController();
-        StorageLine storageLine = storageLineCtrl.findStorageLineById(rs.getInt("Id"));
-        int quantity = storageLine.getQuantity();
-
-        Product product = new Product(rs.getInt("Id"), rs.getString("Name"), rs.getBigDecimal("Price"), quantity, supplier);
+        Product product = new Product(rs.getInt("Id"), rs.getString("Name"), rs.getBigDecimal("Price"), supplier);
         return product;
     }
 

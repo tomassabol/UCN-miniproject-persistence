@@ -66,8 +66,6 @@ create table Products(
     Id int identity(1,1) primary key,
     Name varchar(100),
     Price smallmoney,
-    ProductTypeId int,
-    foreign key (ProductTypeId) references ProductTypes(Id),
     SupplierId int,
     foreign key (SupplierId) references Suppliers(Id)
 );

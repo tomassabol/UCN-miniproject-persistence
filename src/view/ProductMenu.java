@@ -25,6 +25,7 @@ public class ProductMenu {
      */
     public ProductMenu() throws SQLException {
         productCtrl = new ProductController();
+        supplierMenu = new SupplierMenu();
         input = new Input();
     }
 
@@ -82,13 +83,9 @@ public class ProductMenu {
     	clearLines();
     	String name = input.stringInput("Enter the product name: ");
     	BigDecimal price = input.bigDecimalInput("Enter the price of the product: ");
-    	int inStock = input.integerInput("Check the availability of the product: ");
     	Supplier supplier = supplierMenu.findSupplierById();
     	
-    	productCtrl.createProduct(name, price, inStock,supplier);
-    	
-    	
-    	
+    	productCtrl.createProduct(name, price, supplier);
     }
     
     public void listAllProducts() throws SQLException{
@@ -113,11 +110,10 @@ public class ProductMenu {
     	Product product = findProductById();
     	String name = input.stringInput("Enter the product name: ");
     	BigDecimal price = input.bigDecimalInput("Enter the price of the product: ");
-    	int inStock = input.integerInput("Check the availability of the product: ");
     	Supplier supplier = supplierMenu.findSupplierById();
     	
     	
-    	productCtrl.updateProduct(product,name,price,inStock,supplier);
+    	productCtrl.updateProduct(product, name, price, supplier);
     	
     }
     

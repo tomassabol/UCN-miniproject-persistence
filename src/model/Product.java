@@ -10,7 +10,6 @@ public class Product{
     private int id;
     private String name;
     private BigDecimal price;
-    private int inStock;
     private Supplier supplier;
 
     /**
@@ -18,13 +17,12 @@ public class Product{
      * @param id
      * @param name
      * @param price
-     * @param inStock
      * @param supplier
      */
-    public Product(int id, String name, BigDecimal price, int inStock, Supplier supplier) {
+    public Product(int id, String name, BigDecimal price, Supplier supplier) {
         this.id = id;
         this.name = name;
-        this.inStock = inStock;
+        this.price = price;
         this.supplier = supplier;
     }
 
@@ -32,12 +30,11 @@ public class Product{
      * Constructor for class Product
      * @param name
      * @param price
-     * @param inStock
      * @param supplier
      */
-    public Product(String name, BigDecimal price, int inStock, Supplier supplier) {
+    public Product(String name, BigDecimal price, Supplier supplier) {
         this.name = name;
-        this.inStock = inStock;
+        this.price = price;
         this.supplier = supplier;
     }
     
@@ -54,9 +51,6 @@ public class Product{
         return price;
     }
 
-    public int getInStock() {
-        return inStock;
-    }
 
     public Supplier getSupplier() {
         return supplier;
@@ -71,17 +65,12 @@ public class Product{
         this.price = price;
     }
 
-
-    public void setInStock(int inStock) {
-        this.inStock = inStock;
-    }
-
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
 
     public String toString() {
-        return "Order [id=" + id + ", name=" + name + ", price=" + price + ", inStock=" + inStock + ", supplier=" + supplier + "]";
+        return "Order [id=" + id + ", name=" + name + ", price=" + price + ", supplier=" + supplier + "]";
     }
     
 }
