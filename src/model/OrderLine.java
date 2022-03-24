@@ -9,11 +9,11 @@ public class OrderLine {
     private BigDecimal calculatedPrice;
 
 
-    public OrderLine(int id, Product product, int quantity, BigDecimal calculatedPrice) {
+    public OrderLine(int id, Product product, int quantity) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
-        this.calculatedPrice = calculatedPrice;
+        this.calculatedPrice = BigDecimal.valueOf(0);
     }
 
     public int getId() {

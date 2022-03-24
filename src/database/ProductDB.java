@@ -81,7 +81,7 @@ public class ProductDB implements ProductDBIF {
         Supplier supplier = supplierCtrl.findSupplierById(rs.getInt("Supplier"));
 
         StorageLineController storageLineCtrl = new StorageLineController();
-        StorageLine storageLine = storageLineCtrl.findStorageLinebyId(rs.getInt("Id"));
+        StorageLine storageLine = storageLineCtrl.findStorageLineById(rs.getInt("Id"));
         int quantity = storageLine.getQuantity();
 
         Product product = new Product(rs.getInt("Id"), rs.getString("Name"), rs.getBigDecimal("Price"), quantity, supplier);

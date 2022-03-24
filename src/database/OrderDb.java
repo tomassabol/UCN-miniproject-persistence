@@ -58,6 +58,7 @@ public class OrderDb implements OrderDBIF {
         id = DBConnection.getInstance().executeInsertWithIdentity(createOrder);
     }
 
+    /*
     @Override
     public void updateOrder(Order order) throws SQLException {
         int id;
@@ -66,6 +67,7 @@ public class OrderDb implements OrderDBIF {
         updateOrder.setInt(3, order.getCustomer().getId());
         id = DBConnection.getInstance().executeUpdate(updateOrder);
     }
+    */
 
     @Override
     public void deleteOrder(Order order) throws SQLException {
