@@ -33,7 +33,7 @@ public class Input {
      * @return The input, or NumberFormatExveption if the input is not an integer
      */
     public int integerInput(String input) {
-        System.out.println(input);
+        //System.out.println(input);
         String var = stringInput(input);
         int newInput = 0;
         try {
