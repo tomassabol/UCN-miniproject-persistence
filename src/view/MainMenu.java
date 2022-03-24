@@ -25,7 +25,8 @@ public class MainMenu {
             choice = menu.input("Main menu - Choose option:", false);
             switch(choice) {
                 case 1: {
-
+                    OrderMenu orderMenu = new OrderMenu();
+                    orderMenu.run();
                     break;
                 }
                 case 2: {
