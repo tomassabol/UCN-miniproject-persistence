@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import controller.ProductController;
 import model.Product;
 import model.Supplier;
-import controller.SupplierController;
+
 
 
 
@@ -17,7 +17,6 @@ public class ProductMenu {
 	 */
     private ProductController productCtrl;
     private Input input;
-    private SupplierController supplierCtrl;
     private SupplierMenu supplierMenu;
 
     /**
@@ -27,7 +26,6 @@ public class ProductMenu {
     public ProductMenu() throws SQLException {
         productCtrl = new ProductController();
         input = new Input();
-        supplierCtrl = new SupplierController();
     }
 
     /**
@@ -37,12 +35,12 @@ public class ProductMenu {
     public void run() throws SQLException {
         boolean conTinUe = true;
         ListChoice<Integer> menu = new ListChoice<>();
-        menu.addOption("Back to main menu", 0);
-        menu.addOption("Add product", 1);
-        menu.addOption("List all products", 2);
-        menu.addOption("View product", 3);
-        menu.addOption("Update product", 4);
-        menu.addOption("Delete product", 5);
+        menu.addOption("Back to main menu: ", 0);
+        menu.addOption("Add product: ", 1);
+        menu.addOption("List all products: ", 2);
+        menu.addOption("View product: ", 3);
+        menu.addOption("Update product: ", 4);
+        menu.addOption("Delete product: ", 5);
         System.out.println();
 
         while(conTinUe) {
@@ -82,13 +80,12 @@ public class ProductMenu {
     
     public void createProduct() throws SQLException{
     	clearLines();
-    	String name = input.stringInput("Enter the product name");
-    	BigDecimal price = input.bigDecimalInput("Enter the price of the product");
-    	int inStock = input.integerInput("Check the availability of the product");
-    	//Supplier supplier = supplierMenu.findSupplierById();
-    	int id = input.integerInput("Enter supplier`s ID");
+    	String name = input.stringInput("Enter the product name: ");
+    	BigDecimal price = input.bigDecimalInput("Enter the price of the product: ");
+    	int inStock = input.integerInput("Check the availability of the product: ");
+    	Supplier supplier = supplierMenu.findSupplierById();
     	
-    	productCtrl.createProduct(name, price, inStock,id);
+    	productCtrl.createProduct(name, price, inStock,supplier);
     	
     	
     	
@@ -114,12 +111,13 @@ public class ProductMenu {
     	listAllProducts();
     	//Supplier supplier = supplierMenu.findSupplierById();
     	Product product = findProductById();
-    	String name = input.stringInput("Enter the product name");
-    	BigDecimal price = input.bigDecimalInput("Enter the price of the product");
-    	int inStock = input.integerInput("Check the availability of the product");
+    	String name = input.stringInput("Enter the product name: ");
+    	BigDecimal price = input.bigDecimalInput("Enter the price of the product: ");
+    	int inStock = input.integerInput("Check the availability of the product: ");
+    	Supplier supplier = supplierMenu.findSupplierById();
     	
     	
-    	productCtrl.updateProduct(product,name,price,inStock);
+    	productCtrl.updateProduct(product,name,price,inStock,supplier);
     	
     }
     
