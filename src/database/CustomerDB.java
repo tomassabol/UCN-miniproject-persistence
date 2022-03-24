@@ -79,7 +79,8 @@ public class CustomerDB implements CustomerDBIF {
     private Customer buildObject(ResultSet rs) throws SQLException {
         // build customer type object
         CustomerTypeController customerTypeCtrl = new CustomerTypeController();
-        CustomerType customerType = customerTypeCtrl.findCustomerTypeById(rs.getInt("CustomerTypeId"));
+        CustomerType customerType;
+        customerType = customerTypeCtrl.findCustomerTypeById(rs.getInt("CustomerTypeId"));
 
         // build customer object
         Customer customer = new Customer(rs.getInt("Id"), rs.getString("Name"), rs.getString("Address"), rs.getString("City"), rs.getString("Phone"), rs.getString("Email"), customerType);

@@ -52,7 +52,7 @@ public class StorageLine {
     }
 
     public String toString() {
-		return "StorageLine [id=" + id + ", Product=" + product + ", Quantity=" + quantity +  ", Storage=" + storage + "]";
+		return "StorageLine [id=" + id + ", Product=" + product.getName() + ", Quantity=" + quantity +  ", Storage=" + storage.getName() + "]";
 	}
 
 }

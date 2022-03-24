@@ -46,19 +46,17 @@ public class StorageLineDB implements StorageLineDBIF {
     }
     @Override
     public void createStorageLine(StorageLine storageLine) throws SQLException {
-        int id;
         createStorageLine.setInt(1, storageLine.getProduct().getId());
         createStorageLine.setInt(2, storageLine.getQuantity());
         createStorageLine.setInt(3, storageLine.getStorage().getId());
-        id = DBConnection.getInstance().executeInsertWithIdentity(createStorageLine);
+        createStorageLine.execute();
     }
     @Override
     public void updateStorageLine(StorageLine storageLine) throws SQLException {
-        int id;
         updateStorageLine.setInt(1, storageLine.getProduct().getId());
         updateStorageLine.setInt(2, storageLine.getQuantity());
         updateStorageLine.setInt(3, storageLine.getStorage().getId());
-        id = DBConnection.getInstance().executeUpdate(updateStorageLine);
+        updateStorageLine.execute();
     }
     @Override
     public void deleteStorageLine(StorageLine storageLine) throws SQLException {

@@ -71,7 +71,7 @@ public class Order {
     }
 
     public String toString() {
-		return "Order [id=" + id + ", date=" + date + ", total=" + totalPrice + ", customer=" + customer + "]";
+		return "Order [id=" + id + ", date=" + date + ", total=" + totalPrice + ", customer=" + customer.getName() + "]";
 	}
 
 }
