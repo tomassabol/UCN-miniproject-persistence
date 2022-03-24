@@ -43,14 +43,13 @@ public class StorageController {
 
     /**
      * Creates a new storage
-     * @param id The id of the new storage
      * @param name The name of the new storage
      * @param address The address of the new storage
      * @throws SQLException
      */
 
-    public void createStorage(int id, String name, String address) throws SQLException {
-        Storage stor = new Storage(id, name, address);
+    public void createStorage(String name, String address) throws SQLException {
+        Storage stor = new Storage(name, address);
         StorageDBIF.createStorage(stor);
     }
 

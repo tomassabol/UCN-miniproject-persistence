@@ -16,6 +16,12 @@ public class Invoice {
         this.price = price;
     }
 
+    public Invoice(Order order, Date date, BigDecimal price) {
+        this.order = order;
+        this.paymentDate = date;
+        this.price = price;
+    }
+
     public int getId() {
         return this.id;
     }

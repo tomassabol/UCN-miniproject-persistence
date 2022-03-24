@@ -11,11 +11,19 @@ public class Order {
     private Customer customer;
     private ArrayList<OrderLine> orderLines;
 
-    public Order(int id, Date date, BigDecimal totalPrice, Customer customer) {
+    public Order(int id, Date date, Customer customer) {
         this.id = id;
         this.date = date;
-        this.totalPrice = totalPrice;
+        this.totalPrice = BigDecimal.valueOf(0);
         this.customer = customer;
+        this.orderLines = new ArrayList<>();
+    }
+
+    public Order(Date date, Customer customer) {
+        this.date = date;
+        this.totalPrice = BigDecimal.valueOf(0);
+        this.customer = customer;
+        this.orderLines = new ArrayList<>();
     }
 
     public int getId() {
@@ -56,6 +64,10 @@ public class Order {
 
     public void setOrderLines(ArrayList<OrderLine> orderLines) {
         this.orderLines = orderLines;
+    }
+
+    public void addOrderLine(OrderLine orderLine) {
+        this.orderLines.add(orderLine);
     }
 
     public String toString() {

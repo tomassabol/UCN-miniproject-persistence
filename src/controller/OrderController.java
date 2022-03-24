@@ -12,6 +12,7 @@ public class OrderController {
     
     private OrderDBIF orderDBIF;
     private InvoiceDBIF invoiceDBIF;
+    private Order order;
 
     public OrderController() throws SQLException {
         orderDBIF = new OrderDb();
@@ -26,8 +27,8 @@ public class OrderController {
         return orderDBIF.findOrderById(id);
     }
 
-    public void createOrder(int id, Date date, BigDecimal totalPrice, Customer customer) throws SQLException {
-        Order order = new Order(id, date, totalPrice, customer);
+    public void createOrder(Date date, Customer customer) throws SQLException {
+        Order order = new Order(date, customer);
         orderDBIF.createOrder(order);
     }
 
@@ -42,9 +43,37 @@ public class OrderController {
         orderDBIF.deleteOrder(order);
     }
 
+
+
     public Invoice generateInvoice(Order order) throws SQLException {
-        Invoice invoice = new Invoice(order.getId(), order, order.getDate(), order.getTotalPrice()); // TODO: figure out invoice id
+        Invoice invoice = new Invoice(order.getId(), order, order.getDate(), order.getTotalPrice());
         invoiceDBIF.createInvoice(invoice);
         return invoice;
+    }
+
+    public Order startOrder(Customer customer) {
+        Date date = new Date(System.currentTimeMillis());
+        order = new Order(date, customer);
+        return order;
+    }
+
+    public BigDecimal calculateTotal(Order order) {
+        BigDecimal result = BigDecimal.valueOf(0);
+        // get all orderline of the order
+        List<OrderLine> orderLines = order.getOrderLines();
+        for (OrderLine orderLine : orderLines) {
+            // increment price of every orderline
+            result.add(orderLine.getCalculatedPrice());
+        }
+        // set order total
+        order.setTotalPrice(result);
+        return result;
+    }
+
+    // same as createOrder()
+    // does not create new order object, but gets it from constructor
+    // forward order to orderDBIF
+    public void finishOrder(Order order) throws SQLException {
+        orderDBIF.createOrder(order);
     }
 }

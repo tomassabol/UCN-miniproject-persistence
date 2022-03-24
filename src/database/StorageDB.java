@@ -10,7 +10,7 @@ import java.util.List;
 public class StorageDB implements StorageDBIF {
     private static final String FIND_ALL = "SELECT Id, Name, Address FROM Storages";
     private static final String FIND_STORAGE_BY_ID = "SELECT Id, Name, Address FROM Storages WHERE Id=?";
-    private static final String CREATE_STORAGE = "INSERT INTO Storages (Id, Name, Address) values(?, ?, ?) ";
+    private static final String CREATE_STORAGE = "INSERT INTO Storages (Name, Address) values(?, ?) ";
     private static final String UPDATE_STORAGE = "UPDATE Storages SET Name = ?, Address = ? FROM Storages WHERE Id = ?";
     private static final String DELETE_STORAGE = "DELETE FROM Storages WHERE Id = ?";
 
@@ -49,16 +49,18 @@ public class StorageDB implements StorageDBIF {
 
     @Override
     public void createStorage(Storage storage) throws SQLException {
+        int id;
         createStorage.setString(1, storage.getName());
         createStorage.setString(2, storage.getAddress());
-        createStorage.execute();
+        id = DBConnection.getInstance().executeInsertWithIdentity(createStorage);
     }
 
     @Override
     public void updateStorage(Storage storage) throws SQLException {
+        int id;
         updateStorage.setString(1, storage.getName());
         updateStorage.setString(2, storage.getAddress());
-        updateStorage.execute();
+        id = DBConnection.getInstance().executeUpdate(updateStorage);
     }
 
     @Override

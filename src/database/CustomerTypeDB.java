@@ -8,11 +8,11 @@ import model.CustomerType;
 
 public class CustomerTypeDB implements CustomerTypeDBIF {
 	
-	private static final String FIND_ALL = "SELECT Id,Name,Discount FROM CustomerType ";
-	private static final String FIND_CUSTOMERTYPE_BY_ID = "SELECT Id,Name,Discount FROM CustomerType WHERE Id=?";
-	private static final String CREATE_CUSTOMERTYPE = "INSERT INTO CustomerType (Name,Discount) values(?,?) ";
-	private static final String UPDATE_CUSTOMERTYPE = "UPDATE CustomerType SET Name = ?,Discount = ? FROM CustomerType WHERE ID = ?";
-	private static final String DELETE_CUSTOMERTYPE = "DELETE FROM CustomerType WHERE ID = ?";
+	private static final String FIND_ALL = "SELECT Name, Discount FROM CustomerTypes ";
+	private static final String FIND_CUSTOMERTYPE_BY_ID = "SELECT Name, Discount FROM CustomerTypes WHERE Id=?";
+	private static final String CREATE_CUSTOMERTYPE = "INSERT INTO CustomerTypes (Name, Discount) values(?, ?) ";
+	private static final String UPDATE_CUSTOMERTYPE = "UPDATE CustomerTypes SET Name = ?, Discount = ? FROM CustomerTypes WHERE Id = ?";
+	private static final String DELETE_CUSTOMERTYPE = "DELETE FROM CustomerTypes WHERE Id = ?";
 	
 	private PreparedStatement findAll;
 	private PreparedStatement findCustomerTypeById;
@@ -50,16 +50,18 @@ public class CustomerTypeDB implements CustomerTypeDBIF {
 	
 	@Override
 	public void createCustomerType(CustomerType customerType) throws SQLException {
+		int id;
 		createCustomerType.setString(1, customerType.getName());
 		createCustomerType.setInt(2, customerType.getDiscount());
-		createCustomerType.execute();
+		id = DBConnection.getInstance().executeInsertWithIdentity(createCustomerType);
 	}
 	
 	@Override
 	public void updateCustomerType(CustomerType customerType) throws SQLException {
+		int id;
 		updateCustomerType.setString(1, customerType.getName());
 		updateCustomerType.setInt(2, customerType.getDiscount());
-		updateCustomerType.execute();
+		id = DBConnection.getInstance().executeUpdate(updateCustomerType);
 	}
 	
 	@Override

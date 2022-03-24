@@ -27,6 +27,19 @@ public class Product{
         this.inStock = inStock;
         this.supplier = supplier;
     }
+
+    /**
+     * Constructor for class Product
+     * @param name
+     * @param price
+     * @param inStock
+     * @param supplier
+     */
+    public Product(String name, BigDecimal price, int inStock, Supplier supplier) {
+        this.name = name;
+        this.inStock = inStock;
+        this.supplier = supplier;
+    }
     
     //GETTERS
     public int getId() {

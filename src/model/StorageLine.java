@@ -13,6 +13,12 @@ public class StorageLine {
         this.storage = storage;
     }
 
+    public StorageLine(Product product, int quantity, Storage storage) {
+        this.product = product;
+        this.quantity = quantity;
+        this.storage = storage;
+    }
+
     public int getId() {
         return this.id;
     }

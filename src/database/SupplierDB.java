@@ -10,7 +10,7 @@ public class SupplierDB implements SupplierDBIF {
 
     private static final String FIND_ALL = "SELECT Id, Name, Address, Country, Phone, Email FROM Suppliers";
     private static final String FIND_SUPPLIER_BY_ID = "SELECT Id, Name, Address, Country, Phone, Email FROM Suppliers WHERE Id=?";
-    private static final String CREATE_SUPPLIER = "INSERT INTO Suppliers (Id, Name, Address, Country, Phone, Email) values(?, ?, ?, ?, ?, ?) ";
+    private static final String CREATE_SUPPLIER = "INSERT INTO Suppliers (Name, Address, Country, Phone, Email) values(?, ?, ?, ?, ?) ";
     private static final String UPDATE_SUPPLIER = "UPDATE Suppliers SET Name = ?, Address = ?, Country = ?, Phone = ?, Email = ? FROM Suppliers WHERE Id = ?";
     private static final String DELETE_SUPPLIER = "DELETE FROM Suppliers WHERE Id = ?";
 
@@ -49,22 +49,24 @@ public class SupplierDB implements SupplierDBIF {
 
     @Override
     public void createSupplier(Supplier supplier) throws SQLException {
+        int id;
         createSupplier.setString(1, supplier.getName());
         createSupplier.setString(2, supplier.getAddress());
         createSupplier.setString(3, supplier.getCountry());
         createSupplier.setString(4, supplier.getPhone());
         createSupplier.setString(5, supplier.getEmail());
-        createSupplier.execute();
+        id = DBConnection.getInstance().executeInsertWithIdentity(createSupplier);
     }
 
     @Override
     public void updateSupplier(Supplier supplier) throws SQLException {
+        int id;
         updateSupplier.setString(1, supplier.getName());
         updateSupplier.setString(2, supplier.getAddress());
         updateSupplier.setString(3, supplier.getCountry());
         updateSupplier.setString(4, supplier.getPhone());
         updateSupplier.setString(5, supplier.getEmail());
-        updateSupplier.execute();
+        id = DBConnection.getInstance().executeUpdate(updateSupplier);
     }
 
     @Override

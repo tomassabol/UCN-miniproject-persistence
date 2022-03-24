@@ -12,9 +12,9 @@ import model.*;
 public class ProductDB implements ProductDBIF {
 
     private static final String FIND_ALL = "SELECT Id, Name, Price, inStock, ProductTypeId, SupplierId FROM Products";
-    private static final String FIND_PRODUCT_BY_ID = "SELECT Id, Name, Price, inStock, ProductTypeId, SupplierId FROM Products WHERE Id=?";
-    private static final String CREATE_PRODUCT = "INSERT INTO Products (Id, Name, Price, inStock, ProductTypeId, SupplierId) values(?, ?, ?, ?, ?, ?) ";
-    private static final String UPDATE_PRODUCT = "UPDATE Products SET Name = ?, Address = ? FROM Products WHERE Id = ?";
+    private static final String FIND_PRODUCT_BY_ID = "SELECT Id, Name, Price, inStock, ProductTypeId, SupplierId FROM Products WHERE Id = ?";
+    private static final String CREATE_PRODUCT = "INSERT INTO Products (Name, Price, inStock, ProductTypeId, SupplierId) values(?, ?, ?, ?, ?) ";
+    private static final String UPDATE_PRODUCT = "UPDATE Products SET Name = ?, Price = ?, inStock = ?, ProductTypeId = ?, SupplierId = ? FROM Products WHERE Id = ?";
     private static final String DELETE_PRODUCT = "DELETE FROM Products WHERE Id = ?";
 
     private PreparedStatement findAll;
@@ -52,20 +52,22 @@ public class ProductDB implements ProductDBIF {
 
     @Override
     public void createProduct(Product product) throws SQLException {
+        int id;
         createProduct.setString(1, product.getName());
         createProduct.setBigDecimal(2, product.getPrice());
         createProduct.setInt(3, product.getInStock());
         createProduct.setInt(4, product.getSupplier().getId());
-        createProduct.execute();
+        id = DBConnection.getInstance().executeInsertWithIdentity(createProduct);
     }
 
     @Override
     public void updateProduct(Product product) throws SQLException {
+        int id;
         updateProduct.setString(1, product.getName());
         updateProduct.setBigDecimal(2, product.getPrice());
         updateProduct.setInt(3, product.getInStock());
         updateProduct.setInt(4, product.getSupplier().getId());
-        updateProduct.execute();
+        id = DBConnection.getInstance().executeUpdate(updateProduct);
     }
 
     @Override

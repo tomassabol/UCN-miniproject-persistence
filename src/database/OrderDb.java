@@ -10,10 +10,10 @@ import model.*;
 
 public class OrderDb implements OrderDBIF {
 
-    private static final String FIND_ALL = "SELECT Id, Date, TotalPrice, Customerid FROM Orders";
+    private static final String FIND_ALL = "SELECT Id, Date, TotalPrice, CustomerId FROM Orders";
     private static final String FIND_ORDER_BY_ID = "SELECT Id, Date, TotalPrice, Customerid FROM Orders WHERE Id=?";
-    private static final String CREATE_ORDER = "INSERT INTO Orders (Id, Date, TotalPrice, Customerid) values(?, ?, ?, ?) ";
-    private static final String UPDATE_ORDER = "UPDATE Orders SET Date = ?, TotalPrice = ?, Customerid = ? FROM Orders WHERE ID = ?"; 
+    private static final String CREATE_ORDER = "INSERT INTO Orders (Date, TotalPrice, CustomerId) values(?, ?, ?) ";
+    private static final String UPDATE_ORDER = "UPDATE Orders SET Date = ?, TotalPrice = ?, CustomerId = ? FROM Orders WHERE Id = ?"; 
     private static final String DELETE_ORDER = "DELETE FROM Orders WHERE Id = ?";
 
     private PreparedStatement findAll;
@@ -51,18 +51,20 @@ public class OrderDb implements OrderDBIF {
 
     @Override
     public void createOrder(Order order) throws SQLException {
+        int id;
         createOrder.setDate(1, order.getDate());
         createOrder.setBigDecimal(2, order.getTotalPrice());
         createOrder.setInt(3, order.getCustomer().getId());
-        createOrder.execute();
+        id = DBConnection.getInstance().executeInsertWithIdentity(createOrder);
     }
 
     @Override
     public void updateOrder(Order order) throws SQLException {
+        int id;
         updateOrder.setDate(1, order.getDate());
         updateOrder.setBigDecimal(2, order.getTotalPrice());
         updateOrder.setInt(3, order.getCustomer().getId());
-        updateOrder.execute();
+        id = DBConnection.getInstance().executeUpdate(updateOrder);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class OrderDb implements OrderDBIF {
         CustomerController custCont = new CustomerController();
         Customer customer = custCont.findCustomerById(rs.getInt("Id"));
 
-        Order order = new Order(rs.getInt("Id"), rs.getDate("Date"), rs.getBigDecimal("Totalprice"), customer);
+        Order order = new Order(rs.getInt("Id"), rs.getDate("Date"), customer);
         return order;
     }
 

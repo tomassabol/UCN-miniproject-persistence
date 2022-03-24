@@ -10,7 +10,7 @@ import model.*;
 public class StorageLineDB implements StorageLineDBIF {
     private static final String FIND_ALL = "SELECT Id, ProductId, Quantity, StorageId FROM StorageLines";
     private static final String FIND_STORAGELINE_BY_ID = "SELECT Id, ProductId, Quantity, StorageId FROM StorageLines WHERE ProductId=?";
-    private static final String CREATE_STORAGELINE = "INSERT INTO StorageLines (Id, ProductId, Quantity, StorageId) values(?, ?, ?, ?) ";
+    private static final String CREATE_STORAGELINE = "INSERT INTO StorageLines (ProductId, Quantity, StorageId) values(?, ?, ?) ";
     private static final String UPDATE_STORAGELINE = "UPDATE StorageLines SET Quantity = ? FROM StorageLines WHERE ProductId = ?";
     private static final String DELETE_STORAGELINE = "DELETE FROM StorageLines WHERE Id = ?";
 
@@ -46,17 +46,19 @@ public class StorageLineDB implements StorageLineDBIF {
     }
     @Override
     public void createStorageLine(StorageLine storageLine) throws SQLException {
+        int id;
         createStorageLine.setInt(1, storageLine.getProduct().getId());
         createStorageLine.setInt(2, storageLine.getQuantity());
         createStorageLine.setInt(3, storageLine.getStorage().getId());
-        createStorageLine.execute();
+        id = DBConnection.getInstance().executeInsertWithIdentity(createStorageLine);
     }
     @Override
     public void updateStorageLine(StorageLine storageLine) throws SQLException {
+        int id;
         updateStorageLine.setInt(1, storageLine.getProduct().getId());
         updateStorageLine.setInt(2, storageLine.getQuantity());
         updateStorageLine.setInt(3, storageLine.getStorage().getId());
-        updateStorageLine.execute();
+        id = DBConnection.getInstance().executeUpdate(updateStorageLine);
     }
     @Override
     public void deleteStorageLine(StorageLine storageLine) throws SQLException {

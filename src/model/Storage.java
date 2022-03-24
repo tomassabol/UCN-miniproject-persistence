@@ -11,6 +11,11 @@ public class Storage {
         this.address = address;
     }
 
+    public Storage(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
     public int getId() {
         return this.id;
     }

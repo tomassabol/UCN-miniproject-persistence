@@ -24,20 +24,22 @@ public class StorageLineController {
 		return storageLineDBIF.findById(id);
 	}
 	
-	public StorageLine createStorageLine(int id, Product product, int quantity, Storage storage) throws SQLException{
-		StorageLine storageLine = new StorageLine(id,product,quantity,storage);
+	public StorageLine createStorageLine(Product product, int quantity, Storage storage) throws SQLException{
+		StorageLine storageLine = new StorageLine(product, quantity, storage);
 		storageLineDBIF.createStorageLine(storageLine);
 		
 		return storageLine;
 		
 	}
 	
+	/*
 	public void updateStorageLine(StorageLine storageLine,Product product,int quantity,Storage storage) throws SQLException{
 		storageLine.setProduct(product);
 		storageLine.setQuantity(quantity);
 		storageLine.setStorage(storage);
 		storageLineDBIF.updateStorageLine(storageLine);
 	}
+	*/
 	
 	public void deleteStorageLine(StorageLine storageLine) throws SQLException {
 		storageLineDBIF.deleteStorageLine(storageLine);

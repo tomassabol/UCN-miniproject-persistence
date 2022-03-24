@@ -43,7 +43,6 @@ public class CustomerController {
 
     /**
      * Creates a new customer and adds it to the database
-     * @param id The id of the new Customer
      * @param name The name of the new Customer
      * @param address The address of the new Customer
      * @param city The city that the new Customer lives in
@@ -51,8 +50,8 @@ public class CustomerController {
      * @param email The email of the new Customer
      * @throws SQLException
      */
-    public void createCustomer(int id, String name, String address, String city, String phoneNumber, String email) throws SQLException {
-        Customer customer = new Customer(id, name, address, city, phoneNumber, email);
+    public void createCustomer(String name, String address, String city, String phoneNumber, String email) throws SQLException {
+        Customer customer = new Customer(name, address, city, phoneNumber, email);
         customerDBIF.createCustomer(customer);
     }
 

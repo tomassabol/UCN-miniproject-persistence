@@ -17,6 +17,16 @@ public class Customer {
      * Constructor for class Customer
      */
     public Customer(int id, String name, String address, String city, String phoneNumber, String email) { // don't do CustomerType customerType for now
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        //this.customerType = customerType;
+    }
+
+    public Customer(String name, String address, String city, String phoneNumber, String email) { // don't do CustomerType customerType for now
         this.name = name;
         this.address = address;
         this.city = city;

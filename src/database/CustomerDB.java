@@ -7,10 +7,10 @@ import database.interfaces.*;
 import model.Customer;
 
 public class CustomerDB implements CustomerDBIF {
-    private static final String FIND_ALL = "SELECT Id, Name, Address, City, Phone, Email, CustomerTypeId FROM Customers";
-    private static final String FIND_CUSTOMER_BY_ID = "SELECT Id, Name, Address, City, Phone, Email, CustomerTypeId FROM Customers WHERE Id=?";
-    private static final String CREATE_CUSTOMER = "INSERT INTO Customers (Id, Name, Address, City, Phone, Email, CustomerTypeId) values(?, ?, ?, ?, ?, ?, ?) ";
-    private static final String UPDATE_CUSTOMER = "UPDATE Customers SET Name = ?, Address = ?, City = ?, Phone = ?, Email = ?, CustomerTypeId = ? FROM Customers WHERE Id = ?";
+    private static final String FIND_ALL = "SELECT Id, Name, Address, City, Phone, Email FROM Customers";
+    private static final String FIND_CUSTOMER_BY_ID = "SELECT Id, Name, Address, City, Phone, Email FROM Customers WHERE Id=?";
+    private static final String CREATE_CUSTOMER = "INSERT INTO Customers (Name, Address, City, Phone, Email) values(?, ?, ?, ?, ?)";
+    private static final String UPDATE_CUSTOMER = "UPDATE Customers SET Name = ?, Address = ?, City = ?, Phone = ?, Email = ? FROM Customers WHERE Id = ?";
     private static final String DELETE_CUSTOMER = "DELETE FROM Customers WHERE Id = ?";
 
     private PreparedStatement findAll;
@@ -48,22 +48,24 @@ public class CustomerDB implements CustomerDBIF {
 
     @Override
     public void createCustomer(Customer customer) throws SQLException {
+        int id;
         createCustomer.setString(1, customer.getName());
         createCustomer.setString(2, customer.getAddress());
         createCustomer.setString(3, customer.getCity());
         createCustomer.setString(4, customer.getPhoneNumber());
         createCustomer.setString(5, customer.getEmail());
-        createCustomer.execute();
+        id = DBConnection.getInstance().executeInsertWithIdentity(createCustomer);
     }
 
     @Override
     public void updateCustomer(Customer customer) throws SQLException {
+        int id;
         updateCustomer.setString(1, customer.getName());
         updateCustomer.setString(2, customer.getAddress());
         updateCustomer.setString(3, customer.getCity());
         updateCustomer.setString(4, customer.getPhoneNumber());
         updateCustomer.setString(5, customer.getEmail());
-        updateCustomer.execute();
+        id = DBConnection.getInstance().executeUpdate(updateCustomer);
     }
 
     @Override

@@ -48,6 +48,13 @@ public class OrderLine {
         this.calculatedPrice = calculatedPrice;
     }
 
+    public BigDecimal calculateOrderLinePrice() {
+        BigDecimal result = product.getPrice().multiply(BigDecimal.valueOf(quantity));
+        // set calculated price
+        setCalculatedPrice(result);
+        return result;
+    }
+
     public String toString() {
 		return "OrderLine [id=" + id + ", product=" + product + ", quantity=" + quantity + ", pric=" + calculatedPrice + "]";
 	}

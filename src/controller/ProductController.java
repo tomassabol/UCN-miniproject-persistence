@@ -47,7 +47,6 @@ public class ProductController {
 	
 	/**
 	 * Creates a product and adds it to the database
-	 * @param id The id of the new product
 	 * @param name The name of the new product
 	 * @param price The price of the new product
 	 * @param inStock The available stock of the new product
@@ -55,8 +54,8 @@ public class ProductController {
 	 * @return The newly created product
 	 * @throws SQLException
 	 */
-	public Product createProduct(int id, String name, BigDecimal price, int inStock, Supplier supplier) throws SQLException {
-		Product product = new Product(id, name, price, inStock, supplier);
+	public Product createProduct(String name, BigDecimal price, int inStock, Supplier supplier) throws SQLException {
+		Product product = new Product(name, price, inStock, supplier);
 		productDBIF.createProduct(product);
 		return product;
 	}

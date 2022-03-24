@@ -43,13 +43,12 @@ public class CustomerTypeController {
 
     /**
      * Creates a new CustomerType and adds it to the database
-     * @param id The id of the new CustomerType
      * @param name The name of the new CustomerType
      * @param discount The discount that the new CustomerType will have
      * @throws SQLException
      */
-    public void createCustomertype(int id, String name, int discount) throws SQLException {
-        CustomerType customerType = new CustomerType(id, name, discount);
+    public void createCustomertype(String name, int discount) throws SQLException {
+        CustomerType customerType = new CustomerType(name, discount);
         customerTypeDBIF.createCustomerType(customerType);
     }
 

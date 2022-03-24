@@ -12,6 +12,11 @@ public class CustomerType {
         this.discount = discount;
     }
 
+    public CustomerType(String name, int discount) {
+        this.name = name;
+        this.discount = discount;
+    }
+
     public int getId() {
         return this.id;
     }

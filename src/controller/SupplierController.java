@@ -31,7 +31,6 @@ public class SupplierController {
 	
 	/**
 	 * Creates a supplier and adds it to the database
-	 * @param id The id of the new supplier
 	 * @param name The name of the new supplier
 	 * @param address The address of the new supplier
 	 * @param country The country of the new supplier
@@ -40,8 +39,8 @@ public class SupplierController {
 	 * @return The newly created supplier
 	 * @throws SQLException
 	 */
-	public Supplier createSupplier(int id, String name, String address, String country, String phone, String email) throws SQLException {
-		Supplier supplier = new  Supplier(id, name, address, country, phone, email);
+	public Supplier createSupplier(String name, String address, String country, String phone, String email) throws SQLException {
+		Supplier supplier = new  Supplier(name, address, country, phone, email);
 		supplierDBIF.createSupplier(supplier);
 		return supplier;
 	}

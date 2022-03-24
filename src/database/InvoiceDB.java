@@ -12,7 +12,7 @@ import model.Order;
 public class InvoiceDB implements InvoiceDBIF{
 	private static final String FIND_ALL = "SELECT Id, OrderId, [Date], Price FROM Invoices";
 	private static final String FIND_INVOICE_BY_ID = "SELECT Id, OrderId, [Date], Price FROM Invoices WHERE Id=?";
-	private static final String CREATE_INVOICE = "INSERT INTO Invoices (Id, OrderId, [Date], Price) values(?, ?, ?, ?]=--090)";
+	private static final String CREATE_INVOICE = "INSERT INTO Invoices (Id, OrderId, [Date], Price) values(?, ?, ?, ?)";
 	
 	private PreparedStatement findAll;
 	private PreparedStatement findInvoiceById;
@@ -33,9 +33,10 @@ public class InvoiceDB implements InvoiceDBIF{
 	}
 	
 	@Override
-	public Invoice findInvoiceById() throws SQLException {
+	public Invoice findInvoiceById(int id) throws SQLException {
 		Invoice invoice = null;
         ResultSet rs;
+		findInvoiceById.setInt(1, id);
         rs = findInvoiceById.executeQuery();
         rs.next();
         invoice = buildObject(rs);
@@ -44,10 +45,11 @@ public class InvoiceDB implements InvoiceDBIF{
 	
 	@Override
 	public void createInvoice(Invoice invoice) throws SQLException {
+		int id;
 		createInvoice.setObject(1, invoice.getOrder());
 		createInvoice.setDate(2, invoice.getPaymentDate());
 		createInvoice.setBigDecimal(3, invoice.getPrice());
-		createInvoice.execute();
+		id = DBConnection.getInstance().executeInsertWithIdentity(createInvoice);
 	}
 	
 	private Invoice buildObject(ResultSet rs) throws SQLException {

@@ -66,6 +66,7 @@ public class DBConnection {
 	}
 	
 	public int executeInsertWithIdentity(PreparedStatement ps) throws SQLException  {
+		System.out.println("DBConnection, Inserting: " + ps);
 		int res = -1;
 		try {
 			res = ps.executeUpdate();
@@ -104,6 +105,18 @@ public class DBConnection {
 		int res = -1;
 		try (Statement s = connection.createStatement()){
 			res = s.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return res;
+	}
+
+	public int executeUpdate(PreparedStatement ps) throws SQLException {
+		System.out.println("DBConnection, Updating: " + ps);
+		int res = -1;
+		try {
+			res = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
