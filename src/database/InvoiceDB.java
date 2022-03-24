@@ -45,11 +45,10 @@ public class InvoiceDB implements InvoiceDBIF{
 	
 	@Override
 	public void createInvoice(Invoice invoice) throws SQLException {
-		int id;
 		createInvoice.setObject(1, invoice.getOrder());
 		createInvoice.setDate(2, invoice.getPaymentDate());
 		createInvoice.setBigDecimal(3, invoice.getPrice());
-		id = DBConnection.getInstance().executeInsertWithIdentity(createInvoice);
+		createInvoice.execute();
 	}
 	
 	private Invoice buildObject(ResultSet rs) throws SQLException {

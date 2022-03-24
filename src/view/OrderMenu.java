@@ -101,6 +101,7 @@ public class OrderMenu {
                 
 
                     OrderLine orderLine = new OrderLine(product.getId(), product, quantity);
+                    orderLine.calculateOrderLinePrice();
                     order.addOrderLine(orderLine);
 
                     //StorageLine storageLine = storageLineCtrl.findStorageLinebyId(productId); // TODO: crete storage line when creating product. Storageline and product will have same ID
@@ -108,6 +109,7 @@ public class OrderMenu {
                     break;
                 }
                 case 2: {
+                    orderCtrl.calculateTotal(order);
                     orderCtrl.finishOrder(order);
                     conTinUe = false;
                     break;
