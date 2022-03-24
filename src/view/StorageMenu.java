@@ -76,7 +76,7 @@ public class StorageMenu {
     	storageCtrl.updateStorage(storage, name, address);
 	}
 
-	private Storage findStorageById() throws SQLException {
+	public Storage findStorageById() throws SQLException {
 		listAllStorage();
     	int id = input.integerInput("Enter storage's id: ");
     	Storage storage= storageCtrl.findStorageById(id);
