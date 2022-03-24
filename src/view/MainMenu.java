@@ -19,8 +19,6 @@ public class MainMenu {
         menu.addOption("Product menu", 3);
         menu.addOption("Supplier menu", 4);
         menu.addOption("Stock menu", 5);
-        
-        System.out.println();
 
         while(conTinUe) {
             int choice;

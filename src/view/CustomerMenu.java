@@ -17,12 +17,12 @@ public class CustomerMenu {
     public void run() throws SQLException {
         boolean conTinUe = true;
         ListChoice<Integer> menu = new ListChoice<>();
+        menu.addOption("Back to main menu", 0);
         menu.addOption("Add customer", 1);
         menu.addOption("List all customers", 2);
         menu.addOption("View customer", 3);
         menu.addOption("Update customer", 4);
         menu.addOption("Delete customer", 5);
-        menu.addOption("Back to main menu", 0);
         System.out.println();
 
         while(conTinUe) {
@@ -50,8 +50,7 @@ public class CustomerMenu {
                     break;
                 }
                 case 0: {
-                    MainMenu mainMenu = new MainMenu();
-                    mainMenu.run();
+                	conTinUe = false;
                     break;
                 }
                 default: {

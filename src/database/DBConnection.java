@@ -11,7 +11,7 @@ public class DBConnection {
     private static final String server = "hildur.ucn.dk";
     private static final int port = 1433;
     
-    private static final String username = "CSC-CSC-S211_10407575";
+    private static final String username = "CSC-CSD-S211_10407575";
     private static final String password = "Password1!";
 
     private DBConnection() {
