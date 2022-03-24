@@ -32,12 +32,12 @@ public class OrderController {
         orderDBIF.createOrder(order);
     }
 
-    public void updateOrder(Order order, Date date, BigDecimal totalPrice, Customer customer) throws SQLException {
+    /*public void updateOrder(Order order, Date date, BigDecimal totalPrice, Customer customer) throws SQLException {
         order.setDate(date);
         order.setTotalPrice(totalPrice);
         order.setCustomer(customer);
         orderDBIF.updateOrder(order);
-    }
+    }*/
 
     public void deleteOrder(Order order) throws SQLException {
         orderDBIF.deleteOrder(order);

@@ -2,8 +2,6 @@ package view;
 
 import java.sql.SQLException;
 
-import controller.ProductController;
-import controller.StorageController;
 import controller.StorageLineController;
 import model.Product;
 import model.Storage;

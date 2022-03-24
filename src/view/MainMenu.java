@@ -18,7 +18,8 @@ public class MainMenu {
         menu.addOption("Customer menu", 2);
         menu.addOption("Product menu", 3);
         menu.addOption("Supplier menu", 4);
-        menu.addOption("Stock menu", 5);
+        menu.addOption("Storage menu", 5);
+        menu.addOption("Stock menu", 6);
 
         while(conTinUe) {
             int choice;
@@ -35,11 +36,13 @@ public class MainMenu {
                     break;
                 }
                 case 3: {
-
+                	ProductMenu productMenu = new ProductMenu();
+                	productMenu.run();
                     break;
                 }
                 case 4: {
-
+                	SupplierMenu supplierMenu = new SupplierMenu();
+                	supplierMenu.run();
                     break;
                 }
                 case 5: {
@@ -47,15 +50,16 @@ public class MainMenu {
                 	storageMenu.run();
                     break;
                 }
+                case 6: {
+                	StockMenu stockMenu = new StockMenu();
+                	stockMenu.run();
+                }
                 case 0: {
                     System.out.println("Goodbye!");
                     conTinUe = false;
                     break;
                 }
-                default: {
-
-                    break;
-                }
+                default: break;
             }
         }
 
