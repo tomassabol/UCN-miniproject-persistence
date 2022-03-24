@@ -2,37 +2,39 @@ package view;
 
 import java.sql.SQLException;
 
-public class MainMenu {
+import controller.CustomerController;
 
-    /**
-     * Fields for class MainMenu
-     */
+public class CustomerMenu {
+    
+    private CustomerController customerCtrl;
+    private Input input;
 
-    public MainMenu() {}
+    public CustomerMenu() throws SQLException {
+        customerCtrl = new CustomerController();
+        input = new Input();
+    }
 
     public void run() throws SQLException {
         boolean conTinUe = true;
         ListChoice<Integer> menu = new ListChoice<>();
-        menu.addOption("Quit", 0);
-        menu.addOption("Order menu", 1);
-        menu.addOption("Customer menu", 2);
-        menu.addOption("Product menu", 3);
-        menu.addOption("Supplier menu", 4);
-        menu.addOption("Stock menu", 5);
-        
+        menu.addOption("Add customer", 1);
+        menu.addOption("List all customers", 2);
+        menu.addOption("View customer", 3);
+        menu.addOption("Update customer", 4);
+        menu.addOption("Delete customer", 5);
+        menu.addOption("Back to main menu", 0);
         System.out.println();
 
         while(conTinUe) {
             int choice;
-            choice = menu.input("Main menu - Choose option:", false);
+            choice = menu.input("Customer menu - Choose option:", false);
             switch(choice) {
                 case 1: {
 
                     break;
                 }
                 case 2: {
-                    CustomerMenu customerMenu = new CustomerMenu();
-                    customerMenu.run();
+
                     break;
                 }
                 case 3: {
@@ -48,8 +50,8 @@ public class MainMenu {
                     break;
                 }
                 case 0: {
-                    System.out.println("Goodbye!");
-                    conTinUe = false;
+                    MainMenu mainMenu = new MainMenu();
+                    mainMenu.run();
                     break;
                 }
                 default: {
@@ -58,6 +60,5 @@ public class MainMenu {
                 }
             }
         }
-
     }
 }

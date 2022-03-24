@@ -15,7 +15,7 @@ public class DBConnection {
     private static final String password = "Password1!";
 
     private DBConnection() {
-        String url = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s", 
+        String url = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s;encrypt=false", 
             server, port, dbName, username, password);
         
         try {
