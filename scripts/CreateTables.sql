@@ -1,13 +1,15 @@
-drop table if exists Products;
-drop table if exists ProductTypes;
-drop table if exists Storages;
 drop table if exists StorageLines;
+drop table if exists Storages;
+drop table if exists OrderProducts;
+drop table if exists Products;
 drop table if exists Suppliers;
+drop table if exists ProductTypes;
+drop table if exists Invoices;
+drop table if exists Orders;
 drop table if exists Customers;
 drop table if exists CustomerTypes;
-drop table if exists Orders;
-drop table if exists OrderProducts;
-drop table if exists Invoices;
+
+
 
 create table Suppliers(
     Id int identity(1,1) primary key,
@@ -49,17 +51,21 @@ create table Customers(
 create table Orders(
     Id int identity(1,1) primary key,
     [Date] date,
-    TotalPrice int,
     CustomerId int,
     foreign key (CustomerId) references Customers(Id),
+);
+
+CREATE TABLE Invoices(
+    Id int IDENTITY(1,1) primary key,
+    FOREIGN key (Id) REFERENCES Orders(Id),
+    [Date] date,
+    Price SMALLMONEY,
 );
 
 create table Products(
     Id int identity(1,1) primary key,
     Name varchar(100),
     Price smallmoney,
-    inStock int,
-    foreign key (inStock) references StorageLines(Quantity),
     ProductTypeId int,
     foreign key (ProductTypeId) references ProductTypes(Id),
     SupplierId int,
@@ -81,12 +87,4 @@ create table StorageLines(
     Quantity int,
     StorageId int,
     foreign key (StorageId) references Storages(Id)
-);
-
-create table Invoices(
-    Id int identity(1,1),
-    OrderId int,
-    foreign key (OrderId) references Orders(Id),
-    [Date] date,
-    Price smallmoney
 );
