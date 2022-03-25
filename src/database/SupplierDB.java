@@ -64,6 +64,7 @@ public class SupplierDB implements SupplierDBIF {
         updateSupplier.setString(3, supplier.getCountry());
         updateSupplier.setString(4, supplier.getPhone());
         updateSupplier.setString(5, supplier.getEmail());
+        updateSupplier.setInt(6, supplier.getId());
         updateSupplier.execute();
     }
 

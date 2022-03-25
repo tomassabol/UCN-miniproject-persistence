@@ -45,7 +45,7 @@ public class InvoiceDB implements InvoiceDBIF{
 	
 	@Override
 	public void createInvoice(Invoice invoice) throws SQLException {
-		createInvoice.setObject(1, invoice.getOrder());
+		createInvoice.setInt(1, invoice.getOrder().getId());
 		createInvoice.setDate(2, invoice.getPaymentDate());
 		createInvoice.setBigDecimal(3, invoice.getPrice());
 		createInvoice.execute();

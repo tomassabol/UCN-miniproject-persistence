@@ -59,6 +59,7 @@ public class CustomerTypeDB implements CustomerTypeDBIF {
 	public void updateCustomerType(CustomerType customerType) throws SQLException {
 		updateCustomerType.setString(1, customerType.getName());
 		updateCustomerType.setInt(2, customerType.getDiscount());
+		updateCustomerType.setInt(3, customerType.getId());
 		updateCustomerType.execute();
 	}
 	
