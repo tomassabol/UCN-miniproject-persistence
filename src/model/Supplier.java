@@ -1,6 +1,10 @@
 package model;
 
 public class Supplier {
+	
+	 /**
+     * Fields for class Supplier
+     */
     private int id;
     private String name;
     private String address;
@@ -8,6 +12,15 @@ public class Supplier {
     private String phone;
     private String email;
 
+    /**
+     * Constructor for class Supplier
+     * @param id
+     * @param name
+     * @param address
+     * @param country
+     * @param phone
+     * @param email
+     */
     public Supplier(int id, String name, String address, String country, String phone, String email) {
         this.id = id;
         this.name = name;
@@ -17,6 +30,14 @@ public class Supplier {
         this.email = email;
     }
 
+    /**
+     * Constructor for class Supplier
+     * @param name
+     * @param address
+     * @param country
+     * @param phone
+     * @param email
+     */
     public Supplier(String name, String address, String country, String phone, String email) {
         this.name = name;
         this.address = address;

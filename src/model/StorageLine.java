@@ -1,11 +1,22 @@
 package model;
 
 public class StorageLine {
+	
+	 /**
+     * Fields for class StorageLine
+     */
     private int id;
     private Product product;
     private int quantity;
     private Storage storage;
 
+    /**
+     * Constructor for class StorageLine
+     * @param id
+     * @param product
+     * @param quantity
+     * @param storage
+     */
     public StorageLine(int id, Product product, int quantity, Storage storage) {
         this.id = id;
         this.product = product;
@@ -13,6 +24,12 @@ public class StorageLine {
         this.storage = storage;
     }
 
+    /**
+     * Constructor for class StorageLine
+     * @param product
+     * @param quantity
+     * @param storage
+     */
     public StorageLine(Product product, int quantity, Storage storage) {
         this.product = product;
         this.quantity = quantity;

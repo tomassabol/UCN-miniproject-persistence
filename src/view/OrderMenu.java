@@ -13,6 +13,10 @@ import model.Product;
 import model.StorageLine;
 
 public class OrderMenu {
+	
+	/**
+	 * Fields for class OrderMenu
+	 */
     private OrderController orderCtrl;
     
     private CustomerMenu customerMenu;
@@ -21,6 +25,10 @@ public class OrderMenu {
 
     private Input input;
 
+    /**
+     * Constructor for class Order Menu
+     * @throws SQLException
+     */
     public OrderMenu() throws SQLException {
         orderCtrl = new OrderController();
 
@@ -31,6 +39,10 @@ public class OrderMenu {
         input = new Input();
     }
 
+    /**
+     * Prints order menu
+     * @throws SQLException
+     */
     public void run() throws SQLException {
         boolean conTinUe = true;
         ListChoice<Integer> menu = new ListChoice<>();
@@ -77,6 +89,10 @@ public class OrderMenu {
         }
     }
 
+    /**
+     * Creates order
+     * @throws SQLException
+     */
     public void createOrder() throws SQLException {
         clearLines();
         
@@ -140,6 +156,10 @@ public class OrderMenu {
         }
     }
     
+    /**
+     * Lists all orders from the database
+     * @throws SQLException
+     */
     public void listAllOrders() throws SQLException {
         clearLines();
 
@@ -148,6 +168,11 @@ public class OrderMenu {
         }
     }
 
+    /**
+     * Finds order with given id 
+     * @return
+     * @throws SQLException
+     */
     public Order findOrderById() throws SQLException {
         listAllOrders();
         int id = input.integerInput("Enter order ID: ");
@@ -156,17 +181,28 @@ public class OrderMenu {
         return order;
     }
 
+    /**
+     * Deletes order
+     * @throws SQLException
+     */
     public void deleteOrder() throws SQLException {
         Order order = findOrderById();
         orderCtrl.deleteOrder(order);
     }
 
+    /**
+     * Generates invoice for order
+     * @throws SQLException
+     */
     public void genereateInvoice() throws SQLException {
         listAllOrders();
         Order order = findOrderById();
         orderCtrl.generateInvoice(order);
     }
 
+    /**
+     * Prints some lines for visibility
+     */
     public void clearLines() {
         for (int i = 0; i < 10; i++) {
             System.out.println();

@@ -5,12 +5,22 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class Order {
+	
+	 /**
+     * Fields for class Order
+     */
     private int id;
     private Date date;
     private BigDecimal totalPrice;
     private Customer customer;
     private ArrayList<OrderLine> orderLines;
 
+    /**
+     * Constructor for class Order
+     * @param id
+     * @param date
+     * @param customer
+     */
     public Order(int id, Date date, Customer customer) {
         this.id = id;
         this.date = date;
@@ -19,6 +29,11 @@ public class Order {
         this.orderLines = new ArrayList<>();
     }
 
+    /**
+     * Constructor for class Order
+     * @param date
+     * @param customer
+     */
     public Order(Date date, Customer customer) {
         this.date = date;
         this.totalPrice = BigDecimal.valueOf(0);

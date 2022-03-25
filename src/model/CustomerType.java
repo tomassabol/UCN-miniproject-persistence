@@ -2,16 +2,30 @@ package model;
 
 public class CustomerType {
     
+	 /**
+     * Fields for class CustomerType
+     */
     private int id;
     private String name;
     private int discount;
 
+    /**
+     * Constructor for class CustomerType
+     * @param id
+     * @param name
+     * @param discount
+     */
     public CustomerType(int id, String name, int discount) {
         this.id = id;
         this.name = name;
         this.discount = discount;
     }
 
+    /**
+     * Constructor for class CustomerType
+     * @param name
+     * @param discount
+     */
     public CustomerType(String name, int discount) {
         this.name = name;
         this.discount = discount;

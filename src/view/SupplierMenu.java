@@ -72,6 +72,10 @@ public class SupplierMenu {
        }
     }
     
+    /**
+     * Creates supplier
+     * @throws SQLException
+     */
     public void createSupplier() throws SQLException {
     	clearLines();
     	
@@ -84,6 +88,10 @@ public class SupplierMenu {
     	supplierCtrl.createSupplier(name, address, country, phone, email);
     }
     
+    /**
+     * Lists all suppliers from the database
+     * @throws SQLException
+     */
     public void listAllSuppliers() throws SQLException {
     	clearLines();
     	
@@ -92,6 +100,11 @@ public class SupplierMenu {
     	}
     }
     
+    /**
+     * Finds supplier with given id 
+     * @return supplier with given id 
+     * @throws SQLException
+     */
     public Supplier findSupplierById() throws SQLException {
     	listAllSuppliers();
     	int id = input.integerInput("Enter supplier`s ID: ");
@@ -100,6 +113,10 @@ public class SupplierMenu {
     	return supplier;
     }
     
+    /**
+     * Updates information about supplier
+     * @throws SQLException
+     */
     public void updateSupplier() throws SQLException {
     	listAllSuppliers();
     	int id = input.integerInput("Enter supplier`s ID: ");
@@ -112,13 +129,20 @@ public class SupplierMenu {
     	String email = input.stringInput("Add supplier`s email: ");
     	
     	supplierCtrl.updateSupplier(supplier,name, address, country, phone, email);
-    	}
+    }
     
+    /**
+     * Deletes supplier
+     * @throws SQLException
+     */
     public void deleteSupplier() throws SQLException {
     	Supplier supplier = findSupplierById();
     	supplierCtrl.deleteSupplier(supplier);
     }
     
+    /**
+     * Prints some empty line for better visibility
+     */
     public void clearLines() {
     	for(int i = 0; i<10; i++) {
     		System.out.println();

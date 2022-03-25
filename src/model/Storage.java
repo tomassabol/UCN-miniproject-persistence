@@ -1,16 +1,31 @@
 package model;
 
 public class Storage {
+	
+	 /**
+     * Fields for class Storage
+     */
     private int id;
     private String name;
     private String address;
 
+    /**
+     * Constructor for class Storage
+     * @param id
+     * @param name
+     * @param address
+     */
     public Storage(int id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
     }
 
+    /**
+     * Constructor for class Storage
+     * @param name
+     * @param address
+     */
     public Storage(String name, String address) {
         this.name = name;
         this.address = address;

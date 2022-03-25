@@ -79,6 +79,10 @@ public class ProductMenu {
         }
     }
     
+    /**
+     * Creates product
+     * @throws SQLException
+     */
     public void createProduct() throws SQLException{
     	clearLines();
     	String name = input.stringInput("Enter the product name: ");
@@ -88,6 +92,10 @@ public class ProductMenu {
     	productCtrl.createProduct(name, price, supplier);
     }
     
+    /**
+     * Lists all products from the database
+     * @throws SQLException
+     */
     public void listAllProducts() throws SQLException{
     	clearLines();
     	
@@ -96,6 +104,11 @@ public class ProductMenu {
     	}
     }
     
+    /**
+     * Finds product with given id
+     * @return product with given id
+     * @throws SQLException
+     */
     public Product findProductById() throws SQLException{
     	listAllProducts();
     	int id = input.integerInput("Enter product`s id:");
@@ -104,6 +117,10 @@ public class ProductMenu {
     	return product;
     }
     
+    /**
+     * Updates information about product 
+     * @throws SQLException
+     */
     public void updateProduct() throws SQLException{
     	listAllProducts();
     	//Supplier supplier = supplierMenu.findSupplierById();
@@ -117,11 +134,18 @@ public class ProductMenu {
     	
     }
     
+    /**
+     * Deletes product
+     * @throws SQLException
+     */
     public void deleteProduct() throws SQLException{
     	Product product = findProductById();
     	productCtrl.deleteProduct(product);
     }
     
+    /**
+     * Prints some lines for better visibility
+     */
     public void clearLines() {
     	for(int i = 0; i<10; i++) {
     		System.out.println();

@@ -101,6 +101,10 @@ public class CustomerMenu {
         }
     }
     
+    /**
+     * Asks user to input information about the customer and creates it
+     * @throws SQLException
+     */
     public void createCustomer() throws SQLException {
     	clearLines();
     	
@@ -115,6 +119,10 @@ public class CustomerMenu {
     	customerCtrl.createCustomer(name, address, city, phoneNumber, email, customerType);
     }
     
+    /**
+     * Lists all customers from the database
+     * @throws SQLException
+     */
     public void listAllCustomer() throws SQLException {
     	clearLines();
     	
@@ -124,6 +132,11 @@ public class CustomerMenu {
     	
     }
     
+    /**
+     * Finds customer with given id 
+     * @return customer with given id 
+     * @throws SQLException
+     */
     public Customer findCustomerById() throws SQLException {
     	listAllCustomer();
     	int id = input.integerInput("Enter customer's id: ");
@@ -132,6 +145,10 @@ public class CustomerMenu {
     	return customer;
     }
     
+    /**
+     * Updates information about the customer
+     * @throws SQLException
+     */
     public void updateCustomer() throws SQLException {
     	listAllCustomer();
     	Customer customer = findCustomerById();
@@ -147,13 +164,20 @@ public class CustomerMenu {
     	customerCtrl.updateCustomer(customer, name, address, city, phoneNumber, email, customerType);
     }
     
+    /**
+     * Deletes customer
+     * @throws SQLException
+     */
     public void deleteCustomer() throws SQLException {
     	Customer customer = findCustomerById();
     	customerCtrl.deleteCustomer(customer);
     }
 
 
-    // <------- CustomerType ------->
+    /**
+     * Creates customer type
+     * @throws SQLException
+     */
     public void createCustomerType() throws SQLException {
         clearLines();
         String name = input.stringInput("Enter Customer Type Name: ");
@@ -161,12 +185,21 @@ public class CustomerMenu {
         customerTypeCtrl.createCustomertype(name, discount);
     }
 
+    /**
+     * Lists all customer types in the database
+     * @throws SQLException
+     */
     public void listAllCustomerTypes() throws SQLException {
         for (CustomerType customerType : customerTypeCtrl.findAll()) {
             System.out.println(customerType.toString());
         }
     }
 
+    /**
+     * Fonds customer type with given id 
+     * @return customerType with given id 
+     * @throws SQLException
+     */
     public CustomerType findCustomerTypeById() throws SQLException {
         listAllCustomerTypes();
         int id = input.integerInput("Enter ID: ");
@@ -175,6 +208,10 @@ public class CustomerMenu {
         return customerType;
     }
 
+    /**
+     * Updates customer type
+     * @throws SQLException
+     */
     public void updateCustomerType() throws SQLException {
         listAllCustomerTypes();
         CustomerType customerType = findCustomerTypeById();
@@ -183,9 +220,14 @@ public class CustomerMenu {
         int discount = input.integerInput("Enter new Customer Type discount: ");
         customerTypeCtrl.updateCustomerType(customerType, name, discount);
     }
-
-    public void deleteCustomerType() {}
     
+    public void deleteCustomerType() {
+    	
+    }
+    
+    /**
+     * Prints some empty lines for better visibility 
+     */
     public void clearLines() {
     	for(int i = 0; i<10; i++) {
     		System.out.println();

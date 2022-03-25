@@ -6,14 +6,26 @@ import controller.StorageController;
 import model.Storage;
 
 public class StorageMenu {
+	
+	/**
+	 * Fields for class StorageMenu
+	 */
 	private StorageController storageCtrl;
 	private Input input;
 	
+	/**
+	 * Constructor for class StorageMenu
+	 * @throws SQLException
+	 */
 	public StorageMenu() throws SQLException {
 		storageCtrl = new StorageController();
 		input = new Input();
 	}
 	
+	/**
+	 * Prints storage menu
+	 * @throws SQLException
+	 */
 	public void run() throws SQLException {
         boolean conTinUe = true;
         ListChoice<Integer> menu = new ListChoice<>();
@@ -60,6 +72,10 @@ public class StorageMenu {
         }
     }
 	
+	/**
+	 * Creates storage
+	 * @throws SQLException
+	 */
 	private void createStorage() throws SQLException {
 		clearLines();
 		
@@ -69,6 +85,10 @@ public class StorageMenu {
 		storageCtrl.createStorage(name, address);
 	}
 	
+	/**
+	 * Lists all storage in the database
+	 * @throws SQLException
+	 */
 	private void listAllStorage() throws SQLException {
 		clearLines();
 		
@@ -77,6 +97,11 @@ public class StorageMenu {
 		}
 	}
 	
+	/**
+	 * Finds storage with given id
+	 * @return storage with given id
+	 * @throws SQLException
+	 */
 	public Storage findStorageById() throws SQLException {
 		listAllStorage();
     	int id = input.integerInput("Enter storage's id: ");
@@ -85,6 +110,10 @@ public class StorageMenu {
     	return storage;
 	}
 	
+	/**
+	 * Updates information about storage
+	 * @throws SQLException
+	 */
 	private void updateStorage() throws SQLException {
 		listAllStorage();
 		Storage storage = findStorageById();
@@ -95,11 +124,18 @@ public class StorageMenu {
 		storageCtrl.updateStorage(storage, name, address);
 	}
 	
+	/**
+	 * Deletes storage
+	 * @throws SQLException
+	 */
 	private void deleteStorage() throws SQLException {
 		Storage storage = findStorageById();
 		storageCtrl.deleteStorage(storage);
 	}
 	
+	/**
+	 * Prints some clear line for better visibility
+	 */
 	 public void clearLines() {
 	    for(int i = 0; i<10; i++) {
 	    	System.out.println();

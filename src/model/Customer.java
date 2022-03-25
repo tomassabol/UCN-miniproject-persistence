@@ -15,6 +15,13 @@ public class Customer {
 
     /**
      * Constructor for class Customer
+     * @param id
+     * @param name
+     * @param address
+     * @param city
+     * @param phoneNumber
+     * @param email
+     * @param customerType
      */
     public Customer(int id, String name, String address, String city, String phoneNumber, String email, CustomerType customerType) {
         this.id = id;
@@ -26,6 +33,15 @@ public class Customer {
         this.customerType = customerType;
     }
 
+    /**
+     * Constructor for class Customer
+     * @param name
+     * @param address
+     * @param city
+     * @param phoneNumber
+     * @param email
+     * @param customerType
+     */
     public Customer(String name, String address, String city, String phoneNumber, String email, CustomerType customerType) {
         this.name = name;
         this.address = address;

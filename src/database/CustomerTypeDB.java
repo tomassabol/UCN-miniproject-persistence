@@ -59,7 +59,6 @@ public class CustomerTypeDB implements CustomerTypeDBIF {
      */
 	@Override
 	public CustomerType findCustomerTypeById(int id) throws SQLException {
-<<<<<<< Updated upstream
         CustomerType customerType = null;
         ResultSet rs;
         findCustomerTypeById.setInt(1, id);
@@ -68,16 +67,6 @@ public class CustomerTypeDB implements CustomerTypeDBIF {
         customerType = buildObject(rs);
         return customerType;
     }
-=======
-		CustomerType customerType = null;
-		ResultSet rs;
-		findCustomerTypeById.setInt(1,id);
-		rs = findCustomerTypeById.executeQuery();
-		rs.next();
-		customerType = buildObject(rs);
-		return customerType;
-	}
->>>>>>> Stashed changes
 	
 	/**
      * Creates new customer type and adds it to the database

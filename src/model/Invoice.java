@@ -4,11 +4,22 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 public class Invoice {
+	
+	 /**
+     * Fields for class Invoice
+     */
     private int id;
     private Order order;
     private Date paymentDate;
     private BigDecimal price;
 
+    /**
+     * Constructor for class Invoice
+     * @param id
+     * @param order
+     * @param date
+     * @param price
+     */
     public Invoice(int id, Order order, Date date, BigDecimal price) {
         this.id = id;
         this.order = order;
@@ -16,6 +27,12 @@ public class Invoice {
         this.price = price;
     }
 
+    /**
+     * Constructor for class Invoice
+     * @param order
+     * @param date
+     * @param price
+     */
     public Invoice(Order order, Date date, BigDecimal price) {
         this.order = order;
         this.paymentDate = date;

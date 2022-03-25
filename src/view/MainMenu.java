@@ -4,12 +4,12 @@ import java.sql.SQLException;
 
 public class MainMenu {
 
-    /**
-     * Fields for class MainMenu
-     */
-
     public MainMenu() {}
 
+    /**
+     * Prints the main menu
+     * @throws SQLException
+     */
     public void run() throws SQLException {
         boolean conTinUe = true;
         ListChoice<Integer> menu = new ListChoice<>();

@@ -3,11 +3,19 @@ package model;
 import java.math.BigDecimal;
 
 public class OrderLine {
+	
+	 /**
+     * Fields for class OrderLine
+     */
     private Product product;
     private int quantity;
     private BigDecimal calculatedPrice;
 
-
+    /**
+     * Constructor for class OrderLine
+     * @param product
+     * @param quantity
+     */
     public OrderLine(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;

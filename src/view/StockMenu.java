@@ -28,6 +28,10 @@ public class StockMenu {
 		input = new Input();
 	}
 	
+	/**
+	 * Prints stock menu
+	 * @throws SQLException
+	 */
 	public void run() throws SQLException {
 		boolean conTinUe = true;
         ListChoice<Integer> menu = new ListChoice<>();
@@ -74,6 +78,10 @@ public class StockMenu {
         }
 	}
 	
+	/**
+	 * Creates storage
+	 * @throws SQLException
+	 */
 	public void createStorage() throws SQLException {
     	clearLines();
     	
@@ -84,6 +92,10 @@ public class StockMenu {
     	storageLineCtrl.createStorageLine(product, quantity, storage);
     }
 	
+	/**
+	 * Lists all storage lines from the database
+	 * @throws SQLException
+	 */
 	public void listAllStorageLines() throws SQLException {
 		clearLines();
     	
@@ -92,6 +104,11 @@ public class StockMenu {
     	}
 	}
 	
+	/**
+	 * Finds storage line with given id 
+	 * @return
+	 * @throws SQLException
+	 */
 	public StorageLine findStorageLineByProductId() throws SQLException {
 		listAllStorageLines();
     	int id = input.integerInput("Enter storage line id: ");
@@ -100,6 +117,10 @@ public class StockMenu {
     	return storageLine;
 	}
 	
+	/**
+	 * Adds given number of items to stock
+	 * @throws SQLException
+	 */
 	public void addToStock() throws SQLException {
 		StorageLine storageLine = findStorageLineByProductId();
 		int quantity = input.integerInput("How many do you want to add to the stock: ");
@@ -107,15 +128,28 @@ public class StockMenu {
 		storageLineCtrl.addToStock(storageLine, quantity);
 	}
 
+	/**
+	 * Removes given number from stock
+	 * @param storageLine The storage line to remove quantity
+	 * @param quantity The quantity to remove
+	 * @throws SQLException
+	 */
 	public void removeFromStock(StorageLine storageLine, int quantity) throws SQLException {
 		storageLineCtrl.removeFromStock(storageLine, quantity);
 	}
 	
+	/**
+	 * Deletes storage line
+	 * @throws SQLException
+	 */
 	public void deleteStorageLine() throws SQLException {
 		StorageLine storageLine = findStorageLineByProductId();
 		storageLineCtrl.deleteStorageLine(storageLine);
 	}
 	
+	/**
+	 * Prints some lines for visibility
+	 */
 	public void clearLines() {
     	for(int i = 0; i<10; i++) {
     		System.out.println();
