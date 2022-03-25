@@ -13,9 +13,9 @@ public class StorageLineDB implements StorageLineDBIF {
 	 * Prepared statements for class StorageLineDB
 	 */
     private static final String FIND_ALL = "SELECT Id, ProductId, Quantity, StorageId FROM StorageLines";
-    private static final String FIND_STORAGELINE_BY_ID = "SELECT Id, ProductId, Quantity, StorageId FROM StorageLines WHERE ProductId=?";
+    private static final String FIND_STORAGELINE_BY_ID = "SELECT Id, ProductId, Quantity, StorageId FROM StorageLines WHERE Id=?";
     private static final String CREATE_STORAGELINE = "INSERT INTO StorageLines (ProductId, Quantity, StorageId) values(?, ?, ?) ";
-    private static final String UPDATE_STORAGELINE = "UPDATE StorageLines SET Quantity = ? FROM StorageLines WHERE ProductId = ?";
+    private static final String UPDATE_STORAGELINE = "UPDATE StorageLines SET Quantity = ? FROM StorageLines WHERE Id = ?";
     private static final String DELETE_STORAGELINE = "DELETE FROM StorageLines WHERE Id = ?";
 
     /**
@@ -59,11 +59,12 @@ public class StorageLineDB implements StorageLineDBIF {
      * @throws SQLException
      */
     @Override
-    public StorageLine findByProductId(int id) throws SQLException {
+    public StorageLine findById(int id) throws SQLException {
         StorageLine storageLine = null;
         ResultSet rs;
         findById.setInt(1, id);
         rs = findById.executeQuery();
+        rs.next();
         storageLine = buildObject(rs);
         return storageLine;
     }
@@ -93,6 +94,13 @@ public class StorageLineDB implements StorageLineDBIF {
         updateStorageLine.setInt(3, storageLine.getStorage().getId());
         updateStorageLine.execute();
     }
+
+    @Override
+    public void updateStorageLineQuantity(StorageLine storageLine) throws SQLException {
+        updateStorageLine.setInt(1, storageLine.getQuantity());
+        updateStorageLine.setInt(2, storageLine.getStorage().getId());
+        updateStorageLine.execute();
+    }
     
     /**
      * Deletes a storage line form the database
@@ -111,13 +119,14 @@ public class StorageLineDB implements StorageLineDBIF {
      * @throws SQLException
      */
     private StorageLine buildObject(ResultSet rs) throws SQLException {
+        int id = rs.getInt("Id");
         ProductController productCtrl = new ProductController();
         Product product = productCtrl.findProductById(rs.getInt("ProductId"));
 
         StorageController storageCtrl = new StorageController();
         Storage storage = storageCtrl.findStorageById(rs.getInt("StorageId"));
 
-        StorageLine storageLine = new StorageLine(rs.getInt("Id"), product, rs.getInt("Quantity"), storage);
+        StorageLine storageLine = new StorageLine(id, product, rs.getInt("Quantity"), storage);
 
         return storageLine;
     }

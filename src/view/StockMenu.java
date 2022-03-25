@@ -112,7 +112,7 @@ public class StockMenu {
 	public StorageLine findStorageLineByProductId() throws SQLException {
 		listAllStorageLines();
     	int id = input.integerInput("Enter storage line id: ");
-    	StorageLine storageLine = storageLineCtrl.findStorageLineByProductId(id);
+    	StorageLine storageLine = storageLineCtrl.findStorageLineById(id);
     	System.out.println(storageLine.toString());
     	return storageLine;
 	}

@@ -37,8 +37,8 @@ public class StorageLineController {
      * @return The storage line with the id
      * @throws SQLException
      */
-	public StorageLine findStorageLineByProductId(int id) throws SQLException{
-		return storageLineDBIF.findByProductId(id);
+	public StorageLine findStorageLineById(int id) throws SQLException{
+		return storageLineDBIF.findById(id);
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class StorageLineController {
 		storageLine.setQuantity(result);
 
 		// update DB
-		storageLineDBIF.updateStorageLine(storageLine);
+		storageLineDBIF.updateStorageLineQuantity(storageLine);
 	}
 
 	/**

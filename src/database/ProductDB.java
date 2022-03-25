@@ -94,6 +94,7 @@ public class ProductDB implements ProductDBIF {
         updateProduct.setString(1, product.getName());
         updateProduct.setBigDecimal(2, product.getPrice());
         updateProduct.setInt(3, product.getSupplier().getId());
+        updateProduct.setInt(4, product.getSupplier().getId());
         updateProduct.execute();
     }
 

@@ -14,9 +14,9 @@ public class CustomerDB implements CustomerDBIF {
 	 * Prepared statements for class CustomerDB
 	 */
     private static final String FIND_ALL = "SELECT [Id],[Name],[Address],[City],[Phone],[Email],[CustomerTypeId] FROM Customers";
-    private static final String FIND_CUSTOMER_BY_ID = "SELECT [Id],[Name],[Address],[City],[Phone],[Email],[CustomerTypeId] FROM Customers WHERE Id=?";
-    private static final String CREATE_CUSTOMER = "INSERT INTO Customers (Name, Address, City, Phone, Email, CustomerTypeId) values(?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_CUSTOMER = "UPDATE Customers SET Name = ?, Address = ?, City = ?, Phone = ?, Email = ?, CustomerTypeId = ? FROM Customers WHERE Id = ?";
+    private static final String FIND_CUSTOMER_BY_ID = "SELECT [Id],[Name],[Address],[City],[Phone],[Email] FROM Customers WHERE Id=?";
+    private static final String CREATE_CUSTOMER = "INSERT INTO Customers (Name, Address, City, Phone, Email) values(?, ?, ?, ?, ?, ?)";
+    private static final String UPDATE_CUSTOMER = "UPDATE Customers SET Name = ?, Address = ?, City = ?, Phone = ?, Email = ? FROM Customers WHERE Id = ?";
     private static final String DELETE_CUSTOMER = "DELETE FROM Customers WHERE Id = ?";
 
     /**
