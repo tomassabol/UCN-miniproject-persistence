@@ -3,6 +3,10 @@ package database;
 import java.sql.*;
 
 public class DBConnection {
+	
+	/**
+     * Fields for class DBConnection
+     */
     private static Connection connection = null;
     private static DBConnection dbConnection = null;
 
@@ -14,6 +18,9 @@ public class DBConnection {
     private static final String username = "CSC-CSD-S211_10407575";
     private static final String password = "Password1!";
 
+    /**
+     * Constructor for class DBConnection
+     */
     private DBConnection() {
         String url = String.format("jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s;encrypt=false", 
             server, port, dbName, username, password);
@@ -32,6 +39,10 @@ public class DBConnection {
 
     }
 
+    /**
+     * Gets instance of DBConnection
+     * @return an instance of DBConnection
+     */
     public static DBConnection getInstance() {
         if (dbConnection == null) {
             dbConnection = new DBConnection();
@@ -39,10 +50,17 @@ public class DBConnection {
         return dbConnection;
     }
 
+    /**
+     * Gets connection
+     * @return connection
+     */
     public Connection getConnection() {
 		return connection;
 	}
 	
+    /**
+     * Disconnects connection
+     */
 	public static void disconnect() {
 		try {
 			connection.close();
@@ -52,25 +70,46 @@ public class DBConnection {
 		}
 	}
 
-	public static boolean instanceIsNull()
-    {
+	/**
+	 * Checks if the instance is null
+	 * @return true if dbConnection is null
+	 */
+	public static boolean instanceIsNull() {
        return (dbConnection == null);
     } 
 
+	/**
+	 * Starts transaction
+	 * @throws SQLException
+	 */
     public void startTransaction() throws SQLException {
 		connection.setAutoCommit(false);
 	}
 	
+    /**
+     * Commits transaction
+     * @throws SQLException
+     */
 	public void commitTransaction() throws SQLException {
 		connection.commit();
 		connection.setAutoCommit(true);
 	}
 	
+	/**
+	 * Rolls back transaction
+	 * @throws SQLException
+	 */
 	public void rollbackTransaction() throws SQLException {
 		connection.rollback();
 		connection.setAutoCommit(true);
 	}
 	
+	/**
+	 * Executes insertion with identity
+	 * @param ps Prepared statement
+	 * @return result 
+	 * @throws SQLException
+	 */
 	public int executeInsertWithIdentity(PreparedStatement ps) throws SQLException  {
 		System.out.println("DBConnection, Inserting: " + ps);
 		int res = -1;
@@ -88,6 +127,12 @@ public class DBConnection {
 		return res;
 	}
 	
+	/**
+	 * Executes insertion with identity
+	 * @param sql SQL thing B)
+	 * @return result 
+	 * @throws SQLException
+	 */
 	public int executeInsertWithIdentity(String sql) throws SQLException  {
 		System.out.println("DBConnection, Inserting: " + sql);
 		int res = -1;
@@ -106,6 +151,12 @@ public class DBConnection {
 		return res;
 	}
 	
+	/**
+	 * Executes update
+	 * @param sql SQL thing B)
+	 * @return result
+	 * @throws SQLException
+	 */
 	public int executeUpdate(String sql) throws SQLException {
 		System.out.println("DBConnection, Updating: " + sql);
 		int res = -1;
@@ -118,6 +169,12 @@ public class DBConnection {
 		return res;
 	}
 
+	/**
+	 * Executes update
+	 * @param ps Prepared statement
+	 * @return result
+	 * @throws SQLException
+	 */
 	public int executeUpdate(PreparedStatement ps) throws SQLException {
 		System.out.println("DBConnection, Updating: " + ps);
 		int res = -1;

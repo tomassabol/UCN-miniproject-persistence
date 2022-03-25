@@ -57,7 +57,7 @@ public class CustomerController {
     }
 
     /**
-     * Delets a customer from the database
+     * Deletes a customer from the database
      * @param customer The customer that will be deleted from the database
      * @throws SQLException
      */
