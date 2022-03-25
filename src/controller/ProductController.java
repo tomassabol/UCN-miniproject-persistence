@@ -15,7 +15,6 @@ public class ProductController {
 	 * Fields for class ProductController
 	 */
 	private ProductDBIF productDBIF;
-	private SupplierController supplierCtrl;
 	
 	/**
 	 * Constructor for class ProductController
@@ -23,7 +22,6 @@ public class ProductController {
 	 */
 	public ProductController() throws SQLException {
 		productDBIF = new ProductDB();
-		supplierCtrl = new SupplierController();
 	}
 	
 	/**
@@ -81,10 +79,6 @@ public class ProductController {
 		product.setPrice(price);
 		product.setSupplier(supplier);
 		productDBIF.updateProduct(product);
-	}
-	
-	public Supplier findSupplierById(int id) throws SQLException {
-		return supplierCtrl.findSupplierById(id);
 	}
 	
 }

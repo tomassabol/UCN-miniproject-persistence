@@ -58,6 +58,7 @@ public class StorageDB implements StorageDBIF {
     public void updateStorage(Storage storage) throws SQLException {
         updateStorage.setString(1, storage.getName());
         updateStorage.setString(2, storage.getAddress());
+        updateStorage.setInt(3, storage.getId());
         updateStorage.execute();
     }
 
