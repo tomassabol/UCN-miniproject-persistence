@@ -76,4 +76,8 @@ public class OrderController {
     public void finishOrder(Order order) throws SQLException {
         orderDBIF.createOrder(order);
     }
+
+    public void createOrderLine(Order order, OrderLine orderLine) throws SQLException {
+        orderDBIF.createOrderLine(order, orderLine);
+    }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import controller.OrderController;
@@ -9,13 +10,15 @@ import model.Order;
 import model.OrderLine;
 import model.Product;
 //import model.StorageLine;
+import model.StorageLine;
 
 public class OrderMenu {
     private OrderController orderCtrl;
     
     private CustomerMenu customerMenu;
     private ProductMenu productMenu;
-    //private StorageLineController storageLineCtrl;
+    private StockMenu stockMenu;
+
     private Input input;
 
     public OrderMenu() throws SQLException {
@@ -23,7 +26,8 @@ public class OrderMenu {
 
         customerMenu = new CustomerMenu();
         productMenu = new ProductMenu();
-        //storageLineCtrl = new StorageLineController();
+        stockMenu = new StockMenu();
+
         input = new Input();
     }
 
@@ -94,25 +98,36 @@ public class OrderMenu {
             int choice = menu.input("Choose Option", false);
             switch(choice) {
                 case 1: {
-
+                    // get product by id
                     Product product = productMenu.findProductById();
-
+                    // get storage line for product
+                    StorageLine storageLine = stockMenu.findStorageLineByProductId();
+                    System.out.println("Available quantity: " + storageLine.getQuantity());
+                    // get desired quantity
                     int quantity = input.integerInput("Enter Quantity: ");
-                
+                    // create order line object
+                    OrderLine orderLine = new OrderLine(product, quantity);
 
-                    OrderLine orderLine = new OrderLine(product.getId(), product, quantity);
-                    orderLine.calculateOrderLinePrice();
-                    order.addOrderLine(orderLine);
+                    if (storageLine.getQuantity() >= quantity) {
+                        orderLine.calculateOrderLinePrice();
+                        order.addOrderLine(orderLine);
+                        stockMenu.removeFromStock(storageLine, quantity);
+                        orderCtrl.createOrderLine(order, orderLine);
+                    }
 
-                    //StorageLine storageLine = storageLineCtrl.findStorageLinebyId(productId); // TODO: crete storage line when creating product. Storageline and product will have same ID
-                    //storageLineCtrl.removeFromStock(storageLine, quantity);
+
                     break;
                 }
                 case 2: {
                     orderCtrl.calculateTotal(order);
-                    orderCtrl.finishOrder(order);
-                    conTinUe = false;
-                    break;
+                    if (order.getTotalPrice() == BigDecimal.valueOf(0)) {
+                        System.out.println("Empty order will not be created");
+                        break;
+                    } else {
+                        orderCtrl.finishOrder(order);
+                        conTinUe = false;
+                        break;
+                    }
                 }
                 case 0: {
                     conTinUe = false;

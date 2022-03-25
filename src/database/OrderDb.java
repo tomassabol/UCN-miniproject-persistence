@@ -14,17 +14,20 @@ public class OrderDb implements OrderDBIF {
     private static final String FIND_ORDER_BY_ID = "SELECT Id, Date, Customerid FROM Orders WHERE Id=?";
     private static final String CREATE_ORDER = "INSERT INTO Orders (Date, CustomerId) values(?, ?) ";
     private static final String DELETE_ORDER = "DELETE FROM Orders WHERE Id = ?";
+    private static final String CREATE_ORDERLINE = "INSERT INTO OrderProducts (ProductId, Quantity, OrderId) values (?, ?, ?) ";
 
     private PreparedStatement findAll;
 	private PreparedStatement findOrderById;
 	private PreparedStatement createOrder;
 	private PreparedStatement deleteOrder;
+    private PreparedStatement createOrderLine;
 
     public OrderDb() throws SQLException {
         findAll = DBConnection.getInstance().getConnection().prepareStatement(FIND_ALL);
 	    findOrderById = DBConnection.getInstance().getConnection().prepareStatement(FIND_ORDER_BY_ID);
 	    createOrder = DBConnection.getInstance().getConnection().prepareStatement(CREATE_ORDER);
 	    deleteOrder = DBConnection.getInstance().getConnection().prepareStatement(DELETE_ORDER);
+        createOrderLine = DBConnection.getInstance().getConnection().prepareStatement(CREATE_ORDERLINE);
     }
 
     @Override
@@ -51,6 +54,14 @@ public class OrderDb implements OrderDBIF {
         createOrder.setDate(1, order.getDate());
         createOrder.setInt(2, order.getCustomer().getId());
         createOrder.execute();
+    }
+
+    @Override
+    public void createOrderLine(Order order, OrderLine orderLine) throws SQLException {
+        createOrderLine.setInt(1, orderLine.getProduct().getId());
+        createOrderLine.setInt(2, orderLine.getQuantity());
+        createOrderLine.setInt(3, order.getId());
+        createOrderLine.execute();
     }
 
     /*

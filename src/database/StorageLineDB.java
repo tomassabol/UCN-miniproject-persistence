@@ -36,7 +36,7 @@ public class StorageLineDB implements StorageLineDBIF {
         return storageLines;
     }
     @Override
-    public StorageLine findById(int id) throws SQLException {
+    public StorageLine findByProductId(int id) throws SQLException {
         StorageLine storageLine = null;
         ResultSet rs;
         findById.setInt(1, id);

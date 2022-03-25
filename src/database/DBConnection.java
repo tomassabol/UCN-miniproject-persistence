@@ -3,8 +3,8 @@ package database;
 import java.sql.*;
 
 public class DBConnection {
-    private Connection connection = null;
-    private static DBConnection dbConnection;
+    private static Connection connection = null;
+    private static DBConnection dbConnection = null;
 
     private static final String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static final String dbName = "CSC-CSD-S211_10407575";
@@ -43,13 +43,19 @@ public class DBConnection {
 		return connection;
 	}
 	
-	public void disconnect() {
+	public static void disconnect() {
 		try {
 			connection.close();
+			dbConnection = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+
+	public static boolean instanceIsNull()
+    {
+       return (dbConnection == null);
+    } 
 
     public void startTransaction() throws SQLException {
 		connection.setAutoCommit(false);

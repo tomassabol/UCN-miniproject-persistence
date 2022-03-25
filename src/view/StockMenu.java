@@ -52,7 +52,7 @@ public class StockMenu {
                     break;
                 }
                 case 3: {
-                	findStorageLineById();
+                	findStorageLineByProductId();
                     break;
                 }
                 case 4: {
@@ -92,23 +92,27 @@ public class StockMenu {
     	}
 	}
 	
-	public StorageLine findStorageLineById() throws SQLException {
+	public StorageLine findStorageLineByProductId() throws SQLException {
 		listAllStorageLines();
     	int id = input.integerInput("Enter storage line id: ");
-    	StorageLine storageLine = storageLineCtrl.findStorageLineById(id);
+    	StorageLine storageLine = storageLineCtrl.findStorageLineByProductId(id);
     	System.out.println(storageLine.toString());
     	return storageLine;
 	}
 	
 	public void addToStock() throws SQLException {
-		StorageLine storageLine = findStorageLineById();
+		StorageLine storageLine = findStorageLineByProductId();
 		int quantity = input.integerInput("How many do you want to add to the stock: ");
 		
 		storageLineCtrl.addToStock(storageLine, quantity);
 	}
+
+	public void removeFromStock(StorageLine storageLine, int quantity) throws SQLException {
+		storageLineCtrl.removeFromStock(storageLine, quantity);
+	}
 	
 	public void deleteStorageLine() throws SQLException {
-		StorageLine storageLine = findStorageLineById();
+		StorageLine storageLine = findStorageLineByProductId();
 		storageLineCtrl.deleteStorageLine(storageLine);
 	}
 	

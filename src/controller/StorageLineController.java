@@ -20,8 +20,8 @@ public class StorageLineController {
 	return storageLineDBIF.findAll();
 	}
 	
-	public StorageLine findStorageLineById(int id) throws SQLException{
-		return storageLineDBIF.findById(id);
+	public StorageLine findStorageLineByProductId(int id) throws SQLException{
+		return storageLineDBIF.findByProductId(id);
 	}
 	
 	public StorageLine createStorageLine(Product product, int quantity, Storage storage) throws SQLException{
