@@ -16,7 +16,7 @@ public class InvoiceDB implements InvoiceDBIF{
 	 */
 	private static final String FIND_ALL = "SELECT Id, OrderId, [Date], Price FROM Invoices";
 	private static final String FIND_INVOICE_BY_ID = "SELECT Id, OrderId, [Date], Price FROM Invoices WHERE Id=?";
-	private static final String CREATE_INVOICE = "INSERT INTO Invoices (Id, OrderId, [Date], Price) values(?, ?, ?, ?)";
+	private static final String CREATE_INVOICE = "INSERT INTO Invoices (OrderId, [Date], Price) values(?, ?, ?)";
 	
 	/**
      * Fields for class InvioiceDB

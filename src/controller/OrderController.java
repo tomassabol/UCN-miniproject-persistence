@@ -88,10 +88,12 @@ public class OrderController {
      * Starts the order with given customer and the date
      * @param customer The customer of the order
      * @return New order
+     * @throws SQLException
      */
-    public Order startOrder(Customer customer) {
+    public Order startOrder(Customer customer) throws SQLException {
         Date date = new Date(System.currentTimeMillis());
         order = new Order(date, customer);
+        orderDBIF.createOrder(order);
         return order;
     }
 
@@ -113,13 +115,7 @@ public class OrderController {
         return result;
     }
 
-    // same as createOrder()
-    // does not create new order object, but gets it from constructor
-    // forward order to orderDBIF
-    public void finishOrder(Order order) throws SQLException {
-        orderDBIF.createOrder(order);
-    }
-
+    // TODO: INSERT statement conflict with the foreign key
     public void createOrderLine(Order order, OrderLine orderLine) throws SQLException {
         orderDBIF.createOrderLine(order, orderLine);
     }

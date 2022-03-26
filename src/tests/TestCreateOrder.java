@@ -40,7 +40,6 @@ public class TestCreateOrder {
         order.addOrderLine(orderLine);
         orderLine.calculateOrderLinePrice();
         orderCtrl.calculateTotal(order);
-        orderCtrl.finishOrder(order);
 
         // Assert
         assertNotNull(orderCtrl.findOrderById(1));

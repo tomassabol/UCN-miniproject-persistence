@@ -105,7 +105,7 @@ public class StorageLineController {
 			removed = true;
 			// update DB
 			StorageLineDBIF storageLineDBIF = new StorageLineDB();
-			storageLineDBIF.updateStorageLine(storageLine);
+			storageLineDBIF.updateStorageLineQuantity(storageLine);
 		}
 
 		return removed;

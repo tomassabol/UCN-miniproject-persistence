@@ -125,7 +125,7 @@ public class OrderDb implements OrderDBIF {
      */
     private Order buildObject(ResultSet rs) throws SQLException {
         CustomerController custCont = new CustomerController();
-        Customer customer = custCont.findCustomerById(rs.getInt("Id"));
+        Customer customer = custCont.findCustomerById(rs.getInt("CustomerId"));
 
         Order order = new Order(rs.getInt("Id"), rs.getDate("Date"), customer);
         return order;

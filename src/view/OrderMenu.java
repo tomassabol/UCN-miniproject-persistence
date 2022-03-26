@@ -1,6 +1,5 @@
 package view;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import controller.OrderController;
@@ -99,6 +98,7 @@ public class OrderMenu {
         Customer customer = customerMenu.findCustomerById();
         
         Order order = orderCtrl.startOrder(customer);
+        orderCtrl.startOrder(customer);
 
 
         boolean conTinUe = true;
@@ -124,26 +124,18 @@ public class OrderMenu {
                     // create order line object
                     OrderLine orderLine = new OrderLine(product, quantity);
 
-                    if (storageLine.getQuantity() >= quantity) {
-                        orderLine.calculateOrderLinePrice();
-                        order.addOrderLine(orderLine);
-                        stockMenu.removeFromStock(storageLine, quantity);
-                        orderCtrl.createOrderLine(order, orderLine);
-                    }
-
+                    orderLine.calculateOrderLinePrice();
+                    order.addOrderLine(orderLine);
+                    stockMenu.removeFromStock(storageLine, quantity);
+                    orderCtrl.calculateTotal(order);
+                    //orderCtrl.createOrderLine(order, orderLine); // TODO: INSERT statement conflict with the foreign key
 
                     break;
                 }
                 case 2: {
                     orderCtrl.calculateTotal(order);
-                    if (order.getTotalPrice() == BigDecimal.valueOf(0)) {
-                        System.out.println("Empty order will not be created");
-                        break;
-                    } else {
-                        orderCtrl.finishOrder(order);
-                        conTinUe = false;
-                        break;
-                    }
+                    conTinUe = false;
+                    break;
                 }
                 case 0: {
                     conTinUe = false;
