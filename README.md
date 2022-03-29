@@ -6,7 +6,6 @@
   </a>
   <a href="" target="https://github.com/tomassabol/UCN-miniproject-persistence"></a>  
 </p>
-<p>Latest version with GUI.</p>
 
 ### 🏠 [Homepage]("https://github.com/tomassabol/UCN-miniproject-tests)
 
